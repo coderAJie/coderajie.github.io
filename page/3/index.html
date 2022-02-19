@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-CSharp简介" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E7%AE%80%E4%BB%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.463Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E7%AE%80%E4%BB%8B/">C#简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>编译型语言</li>
+<li>是托管代码</li>
+<li>是强类型语言</li>
+<li>面向对象</li>
+<li>基于函数</li>
+</ul>
+<h4 id="编译型和解释型"><a href="#编译型和解释型" class="headerlink" title="编译型和解释型"></a>编译型和解释型</h4><ul>
+<li>编译型：编写代码-编译代码-执行编译文件，编译器编译成可执行文件或者app，编译时针对平台进行了一些优化，这些文件计算机直接执行，运行快（C++，C#，Java）</li>
+<li>解释型：编写代码-执行代码，在运行时实时转化为机器语言，可移植性高，执行效率缓慢（JS、PHP、Python）</li>
+</ul>
+<h4 id="托管代码和非托管代码"><a href="#托管代码和非托管代码" class="headerlink" title="托管代码和非托管代码"></a>托管代码和非托管代码</h4><ul>
+<li>托管代码：内存的分配和释放是自动进行的，发生内存泄露可能性低（C#、Java）</li>
+<li>非托管代码：需要程序员直接管理内存，创建销毁变量时都要手动分配释放内存，不释放可能内存泄露（C++）</li>
+</ul>
+<h4 id="强类型和弱类型"><a href="#强类型和弱类型" class="headerlink" title="强类型和弱类型"></a>强类型和弱类型</h4><ul>
+<li>强类型：创建变量时，制定它可以存储的数据类型</li>
+<li>弱类型：单个变量可以存储任何类型的数据，可能是数值，可能是图片，可能是音频文件</li>
+<li>var关键字：本质只是编译器帮你推测出类型，还是必须定好数据类型。var 是C# 3.5新出的一个定义变量的类型，其实也就是弱化类型的定义，编译器会根据上下文来判断你到底是想用什么类型，类似 OBJECT 但是效率比OBJECT高点。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用var定义变量时有以下四个特点:</span><br><span class="line">1. 必须在定义时初始化。也就是必须是var s = “abcd”形式，而不能是如下形式: var s; s = “abcd”;</span><br><span class="line">2. 一但初始化完成，就不能再给变量赋与初始化值类型不同的值了。</span><br><span class="line">3. var要求是局部变量。</span><br><span class="line">4. 使用var定义变量和object不同，它在效率上和使用强类型方式定义变量完全一样</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E7%AE%80%E4%BB%8B/" data-id="ckzthrrzx001adcu6bjuy944h" data-title="C#简介" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp多态" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E5%A4%9A%E6%80%81/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.462Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E5%A4%9A%E6%80%81/">C#多态</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>###静态多态</p>
+<ul>
+<li>函数重载<br>对相同函数名的函数有多个定义，需要参数列表中的参数类型或者个数不同<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void print(int i)</span><br><span class="line">&#123;</span><br><span class="line">   Console.WriteLine(&quot;Printing int: &#123;0&#125;&quot;, i );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print(double f)</span><br><span class="line">&#123;</span><br><span class="line">   Console.WriteLine(&quot;Printing float: &#123;0&#125;&quot; , f);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运算符重载<br>重载运算符是特殊名称的函数，通过关键字 operator 后跟运算符的符号来定义。与其他函数一样，重载运算符有返回类型和参数列表。<br>下面的函数为用户自定义的类 Box 实现了加法运算符（+）。它把两个 Box 对象的属性相加，并返回相加后的 Box 对象。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static Box operator+ (Box b, Box c)</span><br><span class="line">&#123;</span><br><span class="line">   Box box = new Box();</span><br><span class="line">   box.length = b.length + c.length;</span><br><span class="line">   box.breadth = b.breadth + c.breadth;</span><br><span class="line">   box.height = b.height + c.height;</span><br><span class="line">   return box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+###动态多态</li>
+<li>抽象类<ol>
+<li>您不能创建一个抽象类的实例。</li>
+<li>您不能在一个抽象类外部声明一个抽象方法。</li>
+</ol>
+</li>
+<li>虚方法<br>当有一个定义在类中的函数需要在继承类中实现时，可以使用虚方法。虚方法是使用关键字 virtual 声明的。虚方法可以在不同的继承类中有不同的实现。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E5%A4%9A%E6%80%81/" data-id="ckzthrvl6001cdcu6fd6qc2fh" data-title="C#多态" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp枚举" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E6%9E%9A%E4%B8%BE/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.462Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E6%9E%9A%E4%B8%BE/">C#枚举</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum State</span><br><span class="line">&#123;</span><br><span class="line">    Idle,</span><br><span class="line">    Run,</span><br><span class="line">    Die,</span><br><span class="line">    Attack</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//1</span></span><br><span class="line"><span class="built_in">int</span> index = (<span class="built_in">int</span>)State.Run;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Run</span></span><br><span class="line">   <span class="built_in">string</span> s = Enum.GetName(<span class="keyword">typeof</span>(State), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Int32</span></span><br><span class="line">   Type t = Enum.GetUnderlyingType(<span class="keyword">typeof</span>(State));</span><br><span class="line"></span><br><span class="line"><span class="comment">//Idle Run Die Attack</span></span><br><span class="line">   <span class="built_in">string</span>[] ss = Enum.GetNames(<span class="keyword">typeof</span>(State));</span><br><span class="line">   <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> ss)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Idle Run Die Attack</span></span><br><span class="line">   Array a = Enum.GetValues(<span class="keyword">typeof</span>(State));</span><br><span class="line">   <span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> a)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E6%9E%9A%E4%B8%BE/" data-id="ckzthsdd4001mdcu65wx3ab97" data-title="C#枚举" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp结构体" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E7%BB%93%E6%9E%84%E4%BD%93/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.460Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E7%BB%93%E6%9E%84%E4%BD%93/">C#结构体</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在 C# 中，结构体是值类型数据结构。它使得一个单一变量可以存储各种数据类型的相关数据。struct 关键字用于创建结构体，结构体是用来代表一个记录。<br>例如，您可以按照如下的方式声明 Book 结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct Books</span><br><span class="line">&#123;</span><br><span class="line">   public string title;</span><br><span class="line">   public string author;</span><br><span class="line">   public string subject;</span><br><span class="line">   public int book_id;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>####结构体 VS 类</p>
+<ul>
+<li>类是引用类型，结构是值类型。</li>
+<li>结构可带有方法、字段、索引、属性、接口和事件。</li>
+<li>结构不支持继承。</li>
+<li>结构可定义构造函数，但不能定义析构函数。</li>
+<li>使用 New 操作符创建一个结构对象时，会调用适当的构造函数来创建结构。</li>
+<li>不使用 New 操作符，只有在所有的字段都被初始化之后，对象才被使用。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E7%BB%93%E6%9E%84%E4%BD%93/" data-id="ckzths2jf001gdcu6gbbmfbt1" data-title="C#结构体" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp类" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E7%B1%BB/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.459Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E7%B1%BB/">C#类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>类成员变量封装</p>
+</li>
+<li><p>构造函数，参数化构造函数（带参）</p>
+</li>
+<li><p>析构函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace LineApplication</span><br><span class="line">&#123;</span><br><span class="line">   class Line</span><br><span class="line">   &#123;</span><br><span class="line">      private double length;   // 线条的长度</span><br><span class="line">      public Line()  // 构造函数</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;对象已创建&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      ~Line() //析构函数</span><br><span class="line">      &#123;</span><br><span class="line">         Console.WriteLine(&quot;对象已删除&quot;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public void setLength( double len )</span><br><span class="line">      &#123;</span><br><span class="line">         length = len;</span><br><span class="line">      &#125;</span><br><span class="line">      public double getLength()</span><br><span class="line">      &#123;</span><br><span class="line">         return length;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         Line line = new Line();</span><br><span class="line">         // 设置线条长度</span><br><span class="line">         line.setLength(6.0);</span><br><span class="line">         Console.WriteLine(&quot;线条的长度： &#123;0&#125;&quot;, line.getLength());           </span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当上面的代码被编译和执行时，它会产生下列结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">对象已创建</span><br><span class="line">线条的长度： 6</span><br><span class="line">对象已删除</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>静态成员</p>
+</li>
+</ul>
+<p><strong>静态成员是属于类的，非静态成员是属于对象的</strong></p>
+<ol>
+<li>static与非static最大的区别就是static类型的变量及方法在调用的时候就在内存中分配了地址，且这个地址只有一份，故static可以直接访问。而非static必需手工去实例化该类，以对象的方式去访问变量和方法。</li>
+<li>在一个静态方法里去访问该类的非静态变量或方法，是访问不到的。由于static是属于类本身的，是在类被调用的时候，static类型就已经生成，而非static此时并没有生成，它是属于这个类的对象。故在没有实例化成对象的时候，在静态方法中访问非静态是根本找不到它们的，它不属于这个类。</li>
+<li>在非静态方法中去访问静态是可以的。</li>
+<li>每个类都必须有构造函数，否则此类无法实例化成对象。而我们有时定义的类可以不写它的构造函数，这是因为编译器会帮我们加上一个静态的空构造函数。这样才能实例化。也可以用静态构造函数去初始化静态变量。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>静态</th>
+<th>非静态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>调用</td>
+<td>类.静态方法名</td>
+<td>类 对象 &#x3D; new 类的构造函数  对象.非静态方法名</td>
+</tr>
+<tr>
+<td>初始化</td>
+<td>静态成员是在第一次使用时进行初始化，静态构造函数只能被执行一次</td>
+<td>非静态的成员是在创建对象的时候，非静态的构造函数可以根据需要进行多次使用</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>静态的只有一块全局内存空间</td>
+<td>非静态的可以有多块内存空间（副本）</td>
+</tr>
+<tr>
+<td>释放</td>
+<td>静态的一旦创建则在全局区一直存放，直到应用程序结束</td>
+<td>非静态的则是由new关键字在堆中创建的。可以有多个副本。由GC进行释放。</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E7%B1%BB/" data-id="ckzths5ta001idcu69wk1fcg3" data-title="C#类" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E6%95%B0%E7%BB%84/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.459Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E6%95%B0%E7%BB%84/">C#数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>###创建</p>
+<ol>
+<li>一维数组<ul>
+<li>int[] n  &#x3D;new int[10];  &#x2F;&#x2F;不赋值</li>
+<li>int[] n &#x3D; {1,2,3};         &#x2F;&#x2F;赋值</li>
+</ul>
+</li>
+<li>二维数组<ul>
+<li>int[,] &#x3D; new int[2,3];</li>
+</ul>
+</li>
+<li>交错数组<ul>
+<li>int[][] &#x3D; new int[2][];</li>
+<li>int[][] &#x3D; {new int[]{1,2},new int[]{1,2,3}};</li>
+</ul>
+</li>
+<li>参数数组（params）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace ArrayApplication</span><br><span class="line">&#123;</span><br><span class="line">   class ParamArray</span><br><span class="line">   &#123;</span><br><span class="line">      public int AddElements(params int[] arr)</span><br><span class="line">      &#123;</span><br><span class="line">         int sum = 0;</span><br><span class="line">         foreach (int i in arr)</span><br><span class="line">         &#123;</span><br><span class="line">            sum += i;</span><br><span class="line">         &#125;</span><br><span class="line">         return sum;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   class TestClass</span><br><span class="line">   &#123;</span><br><span class="line">      static void Main(string[] args)</span><br><span class="line">      &#123;</span><br><span class="line">         ParamArray app = new ParamArray();</span><br><span class="line">         int sum = app.AddElements(512, 720, 250, 567, 889);</span><br><span class="line">         Console.WriteLine(&quot;总和是： &#123;0&#125;&quot;, sum);</span><br><span class="line">         Console.ReadKey();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>###方法<br>Array 类是 C# 中所有数组的基类，它是在 System 命名空间中定义。Array 类提供了各种用于数组的属性和方法。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Reverse()</td>
+<td>逆转数组</td>
+</tr>
+<tr>
+<td>Sort()</td>
+<td>排序数组</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E6%95%B0%E7%BB%84/" data-id="ckzthsaic001kdcu652jthzat" data-title="C#数组" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp字符串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.458Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E5%AD%97%E7%AC%A6%E4%B8%B2/">C#字符串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h5 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h5><ul>
+<li><p>Join</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string[] sarray = &#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &#125;;</span><br><span class="line">string message = String.Join(&quot;-&quot;, sarray);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Concat</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">string s2 = &quot;0012&quot;;</span><br><span class="line">s1 = string.Concat(s1, s2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>StringBuilder</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">string s2 = &quot;0012&quot;;</span><br><span class="line">StringBuilder sb = new StringBuilder();</span><br><span class="line">sb.Append(s1);</span><br><span class="line">sb.Append(s2);</span><br><span class="line">Debug.LogError(sb.ToString());   </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><ul>
+<li><p>Equals相等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">string s2 = &quot;0012&quot;;</span><br><span class="line">bool b = string.Equals(s1, s2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为空</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">bool b = string.IsNullOrEmpty(s1);</span><br><span class="line">bool b = string.IsNullOrWhiteSpace(s1);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Compare不相同字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">string s2 = &quot;0000wa&quot;;</span><br><span class="line">int c = string.Compare(s1, s2);</span><br><span class="line">//挨个比较字符Unicode值，大于为1，小于为-1，等于为0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Contains包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">string s2 = &quot;0000wqw121&quot;;</span><br><span class="line">bool b = s2.Contains(s1);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h5><ul>
+<li><p>Insert插入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Insert(0, &quot;ww&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Remove删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Remove(1);</span><br><span class="line">s1 = s1.Remove(1,2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Replace替换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Replace(&#x27;0&#x27;, &#x27;_&#x27;);</span><br><span class="line">s1 = s1.Replace(&quot;0&quot;, &quot;_&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Substring截取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Substring(2, 3);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Split分割</p>
+</li>
+<li><p>PadLeft填充</p>
+</li>
+</ul>
+<h5 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h5><ul>
+<li><p>IndexOf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">index = s1.IndexOf(&#x27;0&#x27;);</span><br><span class="line">index = s1.IndexOf(&quot;00&quot;);</span><br><span class="line">index = s1.LastIndexOf(&quot;00&quot;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h5><ul>
+<li><p>C货币</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:C&#125;&quot;,0.2) 结果为：￥0.20 （英文操作系统结果：$0.20）</span><br><span class="line">string.Format(&quot;&#123;0:C1&#125;&quot;,23.15) 结果为：￥23.2 （保留一位小数）</span><br><span class="line">string.Format(&quot;市场价：&#123;0:C&#125;，优惠价&#123;1:C&#125;&quot;,23.15,19.82)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>D十进制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:D3&#125;&quot;,23) 结果为：023</span><br><span class="line">string.Format(&quot;&#123;0:D2&#125;&quot;,1223) 结果为：1223，（精度说明符指示结果字符串中所需的最少数字个数。）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>E科学计数法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(&quot;&#123;0:E&#125;&quot;, 250000);   //2.500000E+005</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>F固定点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(&quot;&#123;0:F2&#125;&quot;, 25);   //25.00</span><br><span class="line">Console.Write(&quot;&#123;0:F0&#125;&quot;, 25);   //25</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>N逗号隔开数字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:N&#125;&quot;, 14200) 结果为：14,200.00 （默认为小数点后面两位）</span><br><span class="line">string.Format(&quot;&#123;0:N3&#125;&quot;, 14200.2458) 结果为：14,200.246 （自动四舍五入）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>X十六进制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(&quot;&#123;0:X&#125;&quot;, 250);   //FA</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>P百分比</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:P&#125;&quot;, 0.24583) 结果为：24.58% （默认保留百分的两位小数）</span><br><span class="line">string.Format(&quot;&#123;0:P1&#125;&quot;, 0.24583) 结果为：24.6% （自动四舍五入）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>0占位符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:0000.00&#125;&quot;, 12394.039) 结果为：12394.04</span><br><span class="line">string.Format(&quot;&#123;0:0000.00&#125;&quot;, 194.039) 结果为：0194.04</span><br><span class="line">string.Format(&quot;&#123;0:###.##&#125;&quot;, 12394.039) 结果为：12394.04</span><br><span class="line">string.Format(&quot;&#123;0:####.#&#125;&quot;, 194.039) 结果为：194</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日期</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:d&#125;&quot;,System.DateTime.Now) 结果为：2009-3-20 （月份位置不是03）</span><br><span class="line">string.Format(&quot;&#123;0:D&#125;&quot;,System.DateTime.Now) 结果为：2009年3月20日</span><br><span class="line">string.Format(&quot;&#123;0:f&#125;&quot;,System.DateTime.Now) 结果为：2009年3月20日 15:37</span><br><span class="line">string.Format(&quot;&#123;0:F&#125;&quot;,System.DateTime.Now) 结果为：2009年3月20日 15:37:52</span><br><span class="line">string.Format(&quot;&#123;0:g&#125;&quot;,System.DateTime.Now) 结果为：2009-3-20 15:38</span><br><span class="line">string.Format(&quot;&#123;0:G&#125;&quot;,System.DateTime.Now) 结果为：2009-3-20 15:39:27</span><br><span class="line">string.Format(&quot;&#123;0:m&#125;&quot;,System.DateTime.Now) 结果为：3月20日</span><br><span class="line">string.Format(&quot;&#123;0:t&#125;&quot;,System.DateTime.Now) 结果为：15:41</span><br><span class="line">string.Format(&quot;&#123;0:T&#125;&quot;,System.DateTime.Now) 结果为：15:41:50</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="ckzthsgcy001odcu63azobc54" data-title="C#字符串" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

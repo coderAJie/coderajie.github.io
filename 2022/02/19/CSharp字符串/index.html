@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>C#字符串 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="连接 Join 12string[] sarray &#x3D; &amp;#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &amp;#125;;string message &#x3D; String.Join(&quot;-&quot;, sarray);  Concat 123string s1 &#x3D; &amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C#字符串">
+<meta property="og:url" content="http://example.com/2022/02/19/CSharp%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="连接 Join 12string[] sarray &#x3D; &amp;#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &amp;#125;;string message &#x3D; String.Join(&quot;-&quot;, sarray);  Concat 123string s1 &#x3D; &amp;quo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-19T06:41:38.458Z">
+<meta property="article:modified_time" content="2022-02-19T07:01:03.592Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CSharp字符串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.458Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      C#字符串
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h5 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h5><ul>
+<li><p>Join</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string[] sarray = &#123; &quot;Hello&quot;, &quot;From&quot;, &quot;Tutorials&quot;, &quot;Point&quot; &#125;;</span><br><span class="line">string message = String.Join(&quot;-&quot;, sarray);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Concat</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">string s2 = &quot;0012&quot;;</span><br><span class="line">s1 = string.Concat(s1, s2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>StringBuilder</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">string s2 = &quot;0012&quot;;</span><br><span class="line">StringBuilder sb = new StringBuilder();</span><br><span class="line">sb.Append(s1);</span><br><span class="line">sb.Append(s2);</span><br><span class="line">Debug.LogError(sb.ToString());   </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><ul>
+<li><p>Equals相等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">string s2 = &quot;0012&quot;;</span><br><span class="line">bool b = string.Equals(s1, s2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为空</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;00wqw12&quot;;</span><br><span class="line">bool b = string.IsNullOrEmpty(s1);</span><br><span class="line">bool b = string.IsNullOrWhiteSpace(s1);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Compare不相同字符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">string s2 = &quot;0000wa&quot;;</span><br><span class="line">int c = string.Compare(s1, s2);</span><br><span class="line">//挨个比较字符Unicode值，大于为1，小于为-1，等于为0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Contains包含</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">string s2 = &quot;0000wqw121&quot;;</span><br><span class="line">bool b = s2.Contains(s1);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h5><ul>
+<li><p>Insert插入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Insert(0, &quot;ww&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Remove删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Remove(1);</span><br><span class="line">s1 = s1.Remove(1,2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Replace替换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Replace(&#x27;0&#x27;, &#x27;_&#x27;);</span><br><span class="line">s1 = s1.Replace(&quot;0&quot;, &quot;_&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Substring截取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">s1 = s1.Substring(2, 3);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Split分割</p>
+</li>
+<li><p>PadLeft填充</p>
+</li>
+</ul>
+<h5 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h5><ul>
+<li><p>IndexOf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1 = &quot;0000wqw12&quot;;</span><br><span class="line">index = s1.IndexOf(&#x27;0&#x27;);</span><br><span class="line">index = s1.IndexOf(&quot;00&quot;);</span><br><span class="line">index = s1.LastIndexOf(&quot;00&quot;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Format"><a href="#Format" class="headerlink" title="Format"></a>Format</h5><ul>
+<li><p>C货币</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:C&#125;&quot;,0.2) 结果为：￥0.20 （英文操作系统结果：$0.20）</span><br><span class="line">string.Format(&quot;&#123;0:C1&#125;&quot;,23.15) 结果为：￥23.2 （保留一位小数）</span><br><span class="line">string.Format(&quot;市场价：&#123;0:C&#125;，优惠价&#123;1:C&#125;&quot;,23.15,19.82)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>D十进制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:D3&#125;&quot;,23) 结果为：023</span><br><span class="line">string.Format(&quot;&#123;0:D2&#125;&quot;,1223) 结果为：1223，（精度说明符指示结果字符串中所需的最少数字个数。）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>E科学计数法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(&quot;&#123;0:E&#125;&quot;, 250000);   //2.500000E+005</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>F固定点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(&quot;&#123;0:F2&#125;&quot;, 25);   //25.00</span><br><span class="line">Console.Write(&quot;&#123;0:F0&#125;&quot;, 25);   //25</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>N逗号隔开数字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:N&#125;&quot;, 14200) 结果为：14,200.00 （默认为小数点后面两位）</span><br><span class="line">string.Format(&quot;&#123;0:N3&#125;&quot;, 14200.2458) 结果为：14,200.246 （自动四舍五入）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>X十六进制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.Write(&quot;&#123;0:X&#125;&quot;, 250);   //FA</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>P百分比</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:P&#125;&quot;, 0.24583) 结果为：24.58% （默认保留百分的两位小数）</span><br><span class="line">string.Format(&quot;&#123;0:P1&#125;&quot;, 0.24583) 结果为：24.6% （自动四舍五入）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>0占位符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:0000.00&#125;&quot;, 12394.039) 结果为：12394.04</span><br><span class="line">string.Format(&quot;&#123;0:0000.00&#125;&quot;, 194.039) 结果为：0194.04</span><br><span class="line">string.Format(&quot;&#123;0:###.##&#125;&quot;, 12394.039) 结果为：12394.04</span><br><span class="line">string.Format(&quot;&#123;0:####.#&#125;&quot;, 194.039) 结果为：194</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日期</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">string.Format(&quot;&#123;0:d&#125;&quot;,System.DateTime.Now) 结果为：2009-3-20 （月份位置不是03）</span><br><span class="line">string.Format(&quot;&#123;0:D&#125;&quot;,System.DateTime.Now) 结果为：2009年3月20日</span><br><span class="line">string.Format(&quot;&#123;0:f&#125;&quot;,System.DateTime.Now) 结果为：2009年3月20日 15:37</span><br><span class="line">string.Format(&quot;&#123;0:F&#125;&quot;,System.DateTime.Now) 结果为：2009年3月20日 15:37:52</span><br><span class="line">string.Format(&quot;&#123;0:g&#125;&quot;,System.DateTime.Now) 结果为：2009-3-20 15:38</span><br><span class="line">string.Format(&quot;&#123;0:G&#125;&quot;,System.DateTime.Now) 结果为：2009-3-20 15:39:27</span><br><span class="line">string.Format(&quot;&#123;0:m&#125;&quot;,System.DateTime.Now) 结果为：3月20日</span><br><span class="line">string.Format(&quot;&#123;0:t&#125;&quot;,System.DateTime.Now) 结果为：15:41</span><br><span class="line">string.Format(&quot;&#123;0:T&#125;&quot;,System.DateTime.Now) 结果为：15:41:50</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="ckzthsgcy001odcu63azobc54" data-title="C#字符串" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/19/CSharp%E6%95%B0%E7%BB%84/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C#数组
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

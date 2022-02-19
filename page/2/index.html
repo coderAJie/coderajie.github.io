@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Shader-基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Shader-%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.480Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Shader/">Shader</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Shader-%E5%9F%BA%E7%A1%80/">Shader-基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>简介</p>
+<p>分类</p>
+<ul>
+<li>固定管线着色器（没有嵌套CG语言 代码中没有CGPROGARAM的）</li>
+<li>顶点shader（顶点片段着色器 代码段中有surf函数）<br>干预顶点位置 改变模型形态</li>
+<li>像素shader（表面着色器 代码段中有#pargma vertex name 和#pragma fragment frag）<br>干预顶点上色 哪个点贴哪个纹理</li>
+</ul>
+<p>语法</p>
+<pre><code>Shader “name” &#123; // name shader名字
+// 定义的一些属性，定义在这里的会在属性查看器里面显示; 
+[Propeties] 
+// 子着色器列表，一个Shader必须至少有一个子着色器; 
+Subshaders: &#123;....&#125;
+// 如果子着色器显卡不支持，就会降级,即Fallback操作;
+[Fallback]
+</code></pre>
+<hr>
+<p>属性</p>
+<pre><code>_Range (“range value”, Range(0, 1)) = 0.3; // 定义一个范围
+_Color(“color”, Color) = (1, 1, 1, 1); // 定义一个颜色
+_FloatValue(“float value”, Float) = 1 // 定义一个浮点
+_MainTex (“Albedo”, Cube) = “skybox” &#123;TexGen CubeReflect&#125; // 定义一个立方贴图纹理属性;
+</code></pre>
+<ol>
+<li>类型 多种多样<ul>
+<li>Float,Int,Vector(4维向量),Range(start,end)</li>
+<li>Color(n,n,n,n)(0-1)</li>
+<li>2D,3D,Cube,Rect：纹理属性</li>
+</ul>
+</li>
+<li>options：纹理属性选项<ul>
+<li>TexGen：纹理生成模式（纹理自动生成纹理坐标）类型多样，有ObjectLinear,EyeLinear,SphereMap,CubeReflect,CubeNormal</li>
+<li>LightmapMod：光照贴图模式（纹理会被渲染器的光线贴图影响）</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>子着色器</p>
+<p>着色器使用Tags来告诉他们如何和何时会被渲染到渲染引擎，包含多个Pass，依次执行</p>
+<pre><code>    SubShader &#123; [Tags] [CommonState] Passdef [Passdef ...] &#125;
+
+    SubShader
+    &#123;
+        Pass 
+        &#123;
+            Lighting Off        // 关闭灯光
+            SetTexture [_MainTex] &#123; &#125;
+        &#125;
+    &#125;
+</code></pre>
+<ul>
+<li>SubShader Tags<br>    Tags { “TagName1” &#x3D; “Value1” “TagName2” &#x3D; “Value2” }</li>
+</ul>
+<p>指定 TagName1 的值为 Value1, TagName2 的值为 Value2。你可以有尽可能多的标签。</p>
+<p>标签基本上是键值对。在SubShader标签是用来确定SubShader呈现顺序和其他参数。注意，下面的标签必须是SubShader部分，而不是在Pass内部！</p>
+<p>Unity除了内置标签,你可以使用你自己的标签和使用Material.GetTag函数查询它们。</p>
+<hr>
+<p>Pass</p>
+<pre><code>    Pass &#123; [Name and Tags] [RenderSetup] &#125;
+</code></pre>
+<ul>
+<li>Name and Tags：Pass 可以定义它的名称和任意数量的标签-传递给渲染引擎的传递意图的名称 &#x2F; 值的字符串。</li>
+<li>RenderSetup：设置图形硬件的各种状态，例如α混合应打开，深度测试应使用，等等。<ul>
+<li>Cull：设置多边形剔除模式<br>    Cull Back | Front | Off</li>
+<li>ZTest：设置深度缓冲测试模式<br>    ZTest (Less | Greater | LEqual | GEqual | Equal | NotEqual | Always)</li>
+<li>ZWrite：设置深度缓冲的写模式<br>    ZWrite On | Off</li>
+<li>Blend：设置α混合模式<br>    Blend SourceBlendMode DestBlendMode<br>    Blend SourceBlendMode DestBlendMode, AlphaSourceBlendMode AlphaDestBlendMode</li>
+<li>ColorMask：设置彩色通道写掩码。设置为0将关闭所有渲染的颜色通道。默认模式是写所有通道（RGBA），但是对于一些特殊的效果，你可能想离开一定的渠道不被修改，或完全禁用颜色写<br>    ColorMask RGB | A | 0 | any combination of R, G, B, A</li>
+<li>Offset：设置Z缓冲深度偏移量<br>    Offset OffsetFactor, OffsetUnits</li>
+</ul>
+</li>
+<li>固定功能着色器命令<br>        Lighting On | Off<br>        Material { Material Block }<br>        SeparateSpecular On | Off<br>        Color Color-value<br>        ColorMaterial AmbientAndDiffuse | Emission<br>        &#x2F;&#x2F;所有这些控制固定功能，每个顶点照明：打开它，设置材料的颜色，打开高光的亮点，提供默认的颜色，如果顶点光照关闭，并控制网格顶点颜色如何影响照明<ul>
+<li>Fog：<br>    Fog { Fog Block }</li>
+<li>AlphaTest：<br>    AlphaTest ( Less | Greater | LEqual | GEqual | Equal | NotEqual | Always ) CutoffValue</li>
+<li>Texture Combiners：<br>    SetTexture textureProperty { combine options }</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Shader-%E5%9F%BA%E7%A1%80/" data-id="ckzthem6z00002wu6b6lg4inc" data-title="Shader-基础" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-os" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-os/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.479Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-os/">Lua-os</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li><p>os.clock(time) 返回执行该程序CPU花去的时钟秒数</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start=<span class="built_in">os</span>.<span class="built_in">clock</span>()</span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">os</span>.<span class="built_in">clock</span>()-start&gt;<span class="number">3</span> <span class="keyword">then</span></span><br><span class="line">		start=<span class="built_in">os</span>.<span class="built_in">clock</span>()</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;111&quot;</span>)</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.date(time) 返回时间字符串 格式化形式多</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 本地时间</span></span><br><span class="line"><span class="keyword">local</span> timetable = <span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;*t&quot;</span>, <span class="built_in">os</span>.<span class="built_in">time</span>());   </span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">pairs</span>(timetable) <span class="keyword">do</span></span><br><span class="line">      <span class="built_in">print</span>(i, v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- ！格林尼治时间</span></span><br><span class="line"><span class="keyword">local</span> utimetable = <span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;!*t&quot;</span>, <span class="built_in">os</span>.<span class="built_in">time</span>()); </span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">pairs</span>(utimetable) <span class="keyword">do</span></span><br><span class="line">      <span class="built_in">print</span>(i, v);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.time([table]) 返回当前系统的时间</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print:1540433633		0	01/01/70 08:00:00	01/01/70 00:00:00</span></span><br><span class="line"><span class="comment">-- 北京时间的1970-1-1 08:00:00是0时区时间的1970-1-1 00:00:00</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">time</span>())</span><br><span class="line"></span><br><span class="line">t=&#123;year=<span class="number">1970</span>,month=<span class="number">1</span>,day=<span class="number">1</span>,hour=<span class="number">8</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">time</span>(t))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;%c&quot;</span>,<span class="built_in">os</span>.<span class="built_in">time</span>(t)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;!%c&quot;</span>,<span class="built_in">os</span>.<span class="built_in">time</span>(t)))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.difftime(t1,t2) 时间差值 返回秒数</p>
+</li>
+<li><p>os.execute([command]) 调用系统的很多函数 可以复制文件 暂停 等等</p>
+</li>
+<li><p>os.exit() 退出程序</p>
+</li>
+<li><p>os.getenv(name) 查询系统环境变量 程序路径 系统盘符</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;SystemRoot&quot;</span>))          <span class="comment">-- 系统根目录</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;WoXiaXieDe&quot;</span>))          <span class="comment">-- 我乱写的</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;ALLUSERSPROFILE&quot;</span>))     <span class="comment">-- 所有“用户配置文件”的位置</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;alluserSpRoFilE&quot;</span>))     <span class="comment">-- 所有“用户配置文件”的位置</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;COMPUTERNAME&quot;</span>))        <span class="comment">-- 计算机的名称</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;COMSPEC&quot;</span>))             <span class="comment">-- 命令行解释器可执行程序的准确路径</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;HOMEDRIVE&quot;</span>))           <span class="comment">-- 连接到用户主目录的本地工作站驱动器号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;HOMEPATH&quot;</span>))            <span class="comment">-- 用户主目录的完整路径</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;NUMBER_OF_PROCESSORS&quot;</span>))<span class="comment">-- 安装在计算机上的处理器的数目</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;OS&quot;</span>))                  <span class="comment">-- 操作系统的名称</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;PROCESSOR_LEVEL&quot;</span>))     <span class="comment">-- 计算机上安装的处理器的型号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;PATHEXT&quot;</span>))             <span class="comment">-- 连接到用户主目录的本地工作站驱动器号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;PROCESSOR_REVISION&quot;</span>))  <span class="comment">-- 处理器修订号的系统变量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;TEMP&quot;</span>))                <span class="comment">-- 临时目录</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;SYSTEMDRIVE&quot;</span>))         <span class="comment">-- 系统根目录的驱动器</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.remove(file) 删除文件</p>
+</li>
+<li><p>os.rename(oldname,newname) 重命名</p>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-os/" data-id="ckzth8cc6000crwu69ygz5uhf" data-title="Lua-os" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-元表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-%E5%85%83%E8%A1%A8/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.479Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-%E5%85%83%E8%A1%A8/">Lua-元表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>模块库类似一个封装库，存放公用代码，以api接口形式被其他调用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- module.lua模块</span></span><br><span class="line"><span class="comment">-- 定义模块</span></span><br><span class="line"><span class="built_in">module</span>=&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义常量</span></span><br><span class="line"><span class="built_in">module</span>.a=<span class="number">1</span></span><br><span class="line"><span class="comment">-- 定义公有函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module.fun1</span><span class="params">()</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;public&quot;</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- 定义私有函数</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">module.fun2</span><span class="params">()</span></span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;private&quot;</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- return</span></span><br><span class="line"><span class="keyword">return</span> <span class="built_in">module</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- test.lua调用</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;module&quot;</span>)</span><br><span class="line"><span class="built_in">module</span>.fun1()</span><br></pre></td></tr></table></figure>
+
+<h3 id="元表"><a href="#元表" class="headerlink" title="元表"></a>元表</h3><h4 id="元表（metatable）提供两个table之间的操作"><a href="#元表（metatable）提供两个table之间的操作" class="headerlink" title="元表（metatable）提供两个table之间的操作"></a>元表（metatable）提供两个table之间的操作</h4><ul>
+<li><p>set：将table设置为元表 （若元表存在_metatable键值 则设置失败）</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mytable=&#123;&#125;		<span class="comment">--普通表</span></span><br><span class="line">metatable=&#123;&#125;	<span class="comment">--元表</span></span><br><span class="line"><span class="built_in">setmetatable</span>(mytable,metatable)	<span class="comment">--设置为元表</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>get：获取对象的元表</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getmetatable</span>(mytable)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="元方法"><a href="#元方法" class="headerlink" title="元方法"></a>元方法</h4><ul>
+<li><p><code>__index</code>：访问表，表中没有对应值时，去元表的<code>__index</code>中找（<code>__table</code>可以是表包含很多）</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">t1=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line">t2=&#123;&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(t1,t2);</span><br><span class="line"><span class="built_in">print</span>(t1.c);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 包含表</span></span><br><span class="line">t3=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line">t4=&#123;<span class="built_in">__index</span>=&#123;c=<span class="number">3</span>&#125;&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(t3,t4);</span><br><span class="line"><span class="built_in">print</span>(t3.c);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 包含函数(function注意包含t6参数)</span></span><br><span class="line">t5=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line">t6=&#123;<span class="built_in">__index</span>=</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(t6,key)</span></span></span><br><span class="line">		<span class="keyword">if</span>(key==<span class="string">&quot;c&quot;</span>) <span class="keyword">then</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(t5,t6);</span><br><span class="line"><span class="built_in">print</span>(t5.c);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 或者写法</span></span><br><span class="line">t7=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(t7,&#123;<span class="built_in">__index</span>=&#123;c=<span class="number">3</span>&#125;&#125;);</span><br><span class="line"><span class="built_in">print</span>(t7.c);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>__newindex</code>：更新表，赋值对应键值，若没有，就会去元表的<code>__newindex</code>中找</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">m=&#123;d=<span class="number">4</span>&#125;;</span><br><span class="line">meta=&#123;<span class="built_in">__newindex</span>=m&#125;;</span><br><span class="line">mytable=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(mytable,meta);</span><br><span class="line">mytable.c=<span class="number">3</span>;	<span class="comment">-- 将c键值加到m中</span></span><br><span class="line"><span class="built_in">print</span>(mytable.c,m.c,mytable.d,m.d);	<span class="comment">-- nil 3 nil 4</span></span><br><span class="line"></span><br><span class="line">m=&#123;d=<span class="number">4</span>&#125;;</span><br><span class="line">meta=&#123;<span class="built_in">__newindex</span>=m,<span class="built_in">__index</span>=m&#125;;</span><br><span class="line">mytable=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(mytable,meta);</span><br><span class="line">mytable.c=<span class="number">3</span>;	<span class="comment">-- 将c键值加到m中 此刻m含有c键值</span></span><br><span class="line"><span class="built_in">print</span>(mytable.c,m.c,mytable.d,m.d);	<span class="comment">-- 3 3 4 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 或者写法</span></span><br><span class="line">m=&#123;d=<span class="number">4</span>&#125;;</span><br><span class="line">mytable=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(mytable,&#123;<span class="built_in">__newindex</span>=m,<span class="built_in">__index</span>=m&#125;);</span><br><span class="line"></span><br><span class="line">mytable.c=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">print</span>(mytable.c,m.c,mytable.d,m.d);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rawget rawset：rawget可以直接获取索引实际值，不通过<code>__index</code>元方法 rawset可以直接对表中索引赋值，不通过<code>__newindex</code>元方法</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- rawget调用方式不同</span></span><br><span class="line">t7=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(t7,&#123;<span class="built_in">__index</span>=&#123;c=<span class="number">3</span>&#125;&#125;);</span><br><span class="line"><span class="comment">--print((t7.c));</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">rawget</span>(t7,c));</span><br><span class="line"></span><br><span class="line"><span class="comment">-- rawset赋值方式不同</span></span><br><span class="line">m=&#123;&#125;;</span><br><span class="line">mytable=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>&#125;;</span><br><span class="line"><span class="built_in">setmetatable</span>(mytable,&#123;<span class="built_in">__newindex</span>=m&#125;);</span><br><span class="line"><span class="comment">--mytable.c=3;</span></span><br><span class="line"><span class="built_in">rawset</span>(mytable,<span class="string">&quot;c&quot;</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">print</span>(mytable.c,m.c);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>操作符：就是对应符号对应的”__名字“，主要还是对应操作符后面写的方法</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">mytable=&#123;a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span>&#125;;</span><br><span class="line">meta=&#123;<span class="built_in">__add</span>=</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(first,second)</span></span></span><br><span class="line">		<span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(second) <span class="keyword">do</span></span><br><span class="line">			<span class="built_in">table</span>.<span class="built_in">insert</span>(first,v);</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">return</span> first;					<span class="comment">-- 元表就是一个操作</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">&#125;</span><br><span class="line">mytable = <span class="built_in">setmetatable</span>(mytable,meta)</span><br><span class="line"></span><br><span class="line">secondtable=&#123;d=<span class="number">4</span>,e=<span class="number">5</span>,f=<span class="number">6</span>&#125;;</span><br><span class="line">mytable=mytable+secondtable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(mytable) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--[[ 对应其他的操作</span></span><br><span class="line"><span class="comment">+		=&gt;	__add</span></span><br><span class="line"><span class="comment">-(减号)  =&gt;  __sub	</span></span><br><span class="line"><span class="comment">*		=&gt;	__mul</span></span><br><span class="line"><span class="comment">/		=&gt;	__div</span></span><br><span class="line"><span class="comment">%		=&gt;	__mod</span></span><br><span class="line"><span class="comment">-(负号)  =&gt;  __unm</span></span><br><span class="line"><span class="comment">..		=&gt;	__concat</span></span><br><span class="line"><span class="comment">==		=&gt;	__eq</span></span><br><span class="line"><span class="comment">&lt;		=&gt;	__lt</span></span><br><span class="line"><span class="comment">&lt;=		=&gt;	__le</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>__call：在Lua调用一个值时调用，就是调用每个值可能要进行统一操作</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mytable=&#123;<span class="string">&quot;111&quot;</span>,<span class="string">&quot;222&quot;</span>&#125;;</span><br><span class="line">meta=&#123;<span class="built_in">__call</span>=</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(first,a)</span></span></span><br><span class="line">		<span class="keyword">return</span>(<span class="string">&quot;id=&quot;</span>..a..<span class="string">&quot; is &quot;</span>..first[a]);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">&#125;</span><br><span class="line">mytable=<span class="built_in">setmetatable</span>(mytable,meta)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(mytable(<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>__tostring：修改表的输出行为</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mytable=&#123;<span class="string">&quot;111&quot;</span>,<span class="string">&quot;222&quot;</span>&#125;;</span><br><span class="line">meta=&#123;<span class="built_in">__tostring</span>=</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(first)</span></span></span><br><span class="line">		<span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(first) <span class="keyword">do</span></span><br><span class="line">			<span class="keyword">return</span>(<span class="string">&quot;id=&quot;</span>..k..<span class="string">&quot; is &quot;</span>..v);</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setmetatable</span>(mytable,meta)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(mytable);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>meta元表代表的是一种操作，放在其他地方也这样写，与具体的表无关</li>
+<li>meta元表可以做很多操作，命名不同，具体做什么在function里面实现</li>
+<li>meta元表可以做很多初始化或者类似构造函数的功能，面向对象编程</li>
+<li>pairs：是迭代器的元方法，__pairs</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-%E5%85%83%E8%A1%A8/" data-id="ckzthtp5k0024dcu6cx41c4u9" data-title="Lua-元表" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-io" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-io/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.478Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-io/">Lua-io</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>没有特殊情况，所有IO函数在失败的情况下返回nil（第二个参数一般是错误信息</p>
+<p>）</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li><p>io.open(filename[,mode])</p>
+<p>出错返回nil及错误信息 正确返回文件编号 mode为打开方式</p>
+<ul>
+<li>“r”：只读，文件必须存在，默认打开方式</li>
+<li>“r+”：只读，文件必须存在，读取从头开始，写入从头开始，保留原内容</li>
+<li>“w”：只写，文件存在清空，不存在创建，写入从头开始</li>
+<li>“w+”：只写，文件存在清空，不存在创建，读取从头开始，写入从头开始</li>
+<li>“a”：附加方式打开只写文件，文件不存在创建，写入从尾开始，保留原内容</li>
+<li>“a+”：附加方式打开可读写文件，文件不存在创建，写入从尾开始，保留原内容</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 注意：mode有引号 以下纯打开不进行任何操作文件亿被清空</span></span><br><span class="line">a,b=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test1.txt&quot;</span>,<span class="string">&quot;w+&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a,b)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.close([file])</p>
+<p>关闭文件，成功true，参数并不是文件名</p>
+<p>其他写法：file:close() </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print:true</span></span><br><span class="line">a,b=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;test1.txt&quot;</span>,<span class="string">&quot;w+&quot;</span>)</span><br><span class="line"><span class="comment">--c=io.close(&quot;test1.txt&quot;)	--文件名报错</span></span><br><span class="line">c=<span class="built_in">io</span>.<span class="built_in">close</span>(a)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.input([file]) </p>
+<p>参数可以为文件名或者文件，将其设为默认的输入文件，不填参数默认的是命令行界面</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 文件名参数 文件内容作为默认输入文件</span></span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">input</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line">a=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 文件参数 </span></span><br><span class="line">f=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">input</span>(f)</span><br><span class="line">a=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 命令行 默认的io.input()输入文件</span></span><br><span class="line">a=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.output() </p>
+<p>参数文件名，将其设为默认的输出文件，不填参数默认的是命令行界面（io.stdout）</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 注意：最好先确定输入文件以及输出文件 再进行读取操作</span></span><br><span class="line"><span class="comment">-- 命令行界面io.stdout</span></span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">output</span>(<span class="built_in">io</span>.<span class="built_in">stdout</span>)</span><br><span class="line">a=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line">b=<span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&quot;name:&quot;</span>..a)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 文件名</span></span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">output</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line">a=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line">b=<span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&quot;name:&quot;</span>..a)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.read(…) </p>
+<p>根据格式读取内容 读不到返回nil 默认以<code>*l</code>的形式读取</p>
+<p>其他写法：file:read() 这样可以不用设置默认输入文件</p>
+<p>读取完一次之后 当前位置会到读取末尾 下次读取继续继续 若是关闭文件重新读取 则从头开始</p>
+<ul>
+<li>“n”：读取一个数字 唯一返回数字而不是字符串的读取格式</li>
+<li>“a”：从当前位置读取余下的所有内容，如果在文件尾，则返回空串</li>
+<li>“l”：读取下一行内容，在文尾则返回nil</li>
+<li>number：读取number个字符的字符串，number&#x3D;0则返回空串，在文尾则返回nil</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 111.txt</span></span><br><span class="line"><span class="number">1</span>start</span><br><span class="line"><span class="number">2</span>line2</span><br><span class="line"><span class="number">3</span>line3</span><br><span class="line"><span class="number">4</span>line4</span><br><span class="line"><span class="number">5</span>line5</span><br><span class="line"><span class="number">6</span><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 读取完当前位置改变 文件关闭重新读取当前位置从头开始</span></span><br><span class="line"><span class="comment">-- print:1start	2line2	1start</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">input</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line">a=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">b=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">close</span>(file)</span><br><span class="line"></span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">input</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line">c=<span class="built_in">io</span>.<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- b的10个字符包括一个换行符 c=nil </span></span><br><span class="line"><span class="comment">--[[ print:</span></span><br><span class="line"><span class="comment">a:1start</span></span><br><span class="line"><span class="comment">b:2line2</span></span><br><span class="line"><span class="comment">3li</span></span><br><span class="line"><span class="comment">nil</span></span><br><span class="line"><span class="comment">d:ne3</span></span><br><span class="line"><span class="comment">4line4</span></span><br><span class="line"><span class="comment">5line5</span></span><br><span class="line"><span class="comment">6end</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">a=file:<span class="built_in">read</span>(<span class="string">&quot;*l&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;a:&quot;</span>..a)</span><br><span class="line"></span><br><span class="line">b=file:<span class="built_in">read</span>(<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b:&quot;</span>..b)</span><br><span class="line"></span><br><span class="line">c=file:<span class="built_in">read</span>(<span class="string">&quot;*n&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line">d=file:<span class="built_in">read</span>(<span class="string">&quot;*a&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;d:&quot;</span>..d)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.write(…)</p>
+<p>可以有多个参数，每个参数必须是字符串或者数字，其他类型使用tostring或string.format()写入 </p>
+<p>其他写法：file:write() 这样可以不用设置默认输出文件</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[ print:</span></span><br><span class="line"><span class="comment">hello</span></span><br><span class="line"><span class="comment">hello</span></span><br><span class="line"><span class="comment">world</span></span><br><span class="line"><span class="comment">world</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>,<span class="string">&quot;a&quot;</span>)</span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">output</span>(file)</span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&quot;hello\n&quot;</span>)</span><br><span class="line"><span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&quot;hello\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">file:<span class="built_in">write</span>(<span class="string">&quot;world\n&quot;</span>)</span><br><span class="line">file:<span class="built_in">write</span>(<span class="string">&quot;world\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>file:seek(whence,offset)</p>
+<p>控制读写指针，设置获取文件位置，返回值为最终文件位置，offset表示偏移默认0，whence表示不同模式</p>
+<ul>
+<li>“set”：文件头开始</li>
+<li>“cur”：从当前开始（默认）</li>
+<li>“end”：文件尾开始</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- offset可以为负数 file:seek(&quot;end&quot;)返回值正好是文件大小</span></span><br><span class="line"><span class="comment">--[[</span></span><br><span class="line"><span class="comment">n:0		a:1start</span></span><br><span class="line"><span class="comment">n:3		a:art</span></span><br><span class="line"><span class="comment">2l</span></span><br><span class="line"><span class="comment">n:13	a:2</span></span><br><span class="line"><span class="comment">3lin</span></span><br><span class="line"><span class="comment">n:41	a:end</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>,<span class="string">&quot;a+&quot;</span>)</span><br><span class="line">n=file:seek(<span class="string">&quot;set&quot;</span>);</span><br><span class="line">a=file:<span class="built_in">read</span>(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n:&quot;</span>..n..<span class="string">&quot;	a:&quot;</span>..a)</span><br><span class="line"></span><br><span class="line">n=file:seek(<span class="string">&quot;set&quot;</span>,<span class="number">3</span>);</span><br><span class="line">a=file:<span class="built_in">read</span>(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n:&quot;</span>..n..<span class="string">&quot;	a:&quot;</span>..a)</span><br><span class="line"></span><br><span class="line">n=file:seek(<span class="string">&quot;cur&quot;</span>,<span class="number">3</span>);</span><br><span class="line">a=file:<span class="built_in">read</span>(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n:&quot;</span>..n..<span class="string">&quot;	a:&quot;</span>..a)</span><br><span class="line"></span><br><span class="line">n=file:seek(<span class="string">&quot;end&quot;</span>,<span class="number">-3</span>);</span><br><span class="line">a=file:<span class="built_in">read</span>(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n:&quot;</span>..n..<span class="string">&quot;	a:&quot;</span>..a)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 关于a+方式，只从内容尾开始写入，seek当前位置是正确的，但执行写入时直接继续在尾部写，并不在当前位置写入</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>,<span class="string">&quot;a+&quot;</span>)</span><br><span class="line">a=file:<span class="built_in">write</span>(<span class="string">&quot;!-!&quot;</span>)</span><br><span class="line">n=file:seek(<span class="string">&quot;cur&quot;</span>,<span class="number">-10</span>)</span><br><span class="line">b=file:<span class="built_in">write</span>(<span class="string">&quot;!-!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print:!!---!</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>,<span class="string">&quot;w&quot;</span>)</span><br><span class="line">file:seek()</span><br><span class="line">file:<span class="built_in">write</span>(<span class="string">&quot;!-!&quot;</span>)</span><br><span class="line">file:seek(<span class="string">&quot;cur&quot;</span>,<span class="number">-2</span>)</span><br><span class="line">file:<span class="built_in">write</span>(<span class="string">&quot;!---!&quot;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.type()</p>
+<p>判断文件描述符的状态 是一个打开的文件返回字符串“file”，是个关闭的文件返回字符串“closed file”，是无效文件描述符返回nil</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print:file	closed file		nil</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">io</span>.<span class="built_in">type</span>(file))</span><br><span class="line"></span><br><span class="line">file:<span class="built_in">close</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">io</span>.<span class="built_in">type</span>(file))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">io</span>.<span class="built_in">type</span>(<span class="string">&quot;Test&quot;</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>io.lines([filename])</p>
+<p>只读方式打开文件 返回一个迭代函数，每次调用都返回文件中新的一行，当读取到结尾时，返回nil并自动关闭文件</p>
+<p>因为是只读方式，所以最好先检测一下是否存在</p>
+<p>其他写法：file:lines() 这种写法结束时不会自动关闭</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--[[ print:</span></span><br><span class="line"><span class="comment">1start</span></span><br><span class="line"><span class="comment">2line2</span></span><br><span class="line"><span class="comment">3line3</span></span><br><span class="line"><span class="comment">4line4</span></span><br><span class="line"><span class="comment">5line5</span></span><br><span class="line"><span class="comment">6end</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line">func=<span class="built_in">io</span>.<span class="built_in">lines</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(func())</span><br><span class="line"><span class="built_in">print</span>(func())</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> func <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(line)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 注意：输出最后io.type=file 说明文件在最后没有关闭，这个是io.lines(filename)和file:name的区别</span></span><br><span class="line"><span class="comment">--[[ print:</span></span><br><span class="line"><span class="comment">1start</span></span><br><span class="line"><span class="comment">2line2</span></span><br><span class="line"><span class="comment">3line3</span></span><br><span class="line"><span class="comment">4line4</span></span><br><span class="line"><span class="comment">5line5</span></span><br><span class="line"><span class="comment">6end</span></span><br><span class="line"><span class="comment">file</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line">file=<span class="built_in">io</span>.<span class="built_in">open</span>(<span class="string">&quot;111.txt&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> file:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(line)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">io</span>.<span class="built_in">type</span>(file))</span><br><span class="line">file:<span class="built_in">close</span>()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-io/" data-id="ckzth8cc4000arwu6crhjb2w3" data-title="Lua-io" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-table" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-table/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.478Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-table/">Lua-table</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>table库中函数针对的几乎都是数组类型的</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li><p>table.getn()</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- #表长</span></span><br><span class="line"><span class="comment">-- table.getn() #table 索引1开始 正序连续 </span></span><br><span class="line"><span class="comment">-- 1.不连续			    print:3 3</span></span><br><span class="line">mytable=&#123;[<span class="number">1</span>]=<span class="string">&quot;a&quot;</span>,[<span class="number">2</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">3</span>]=<span class="string">&quot;c&quot;</span>,[<span class="number">5</span>]=<span class="string">&quot;e&quot;</span>&#125;</span><br><span class="line">mytable=&#123;[<span class="number">1</span>]=<span class="string">&quot;a&quot;</span>,[<span class="number">2</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">3</span>]=<span class="string">&quot;c&quot;</span>,[<span class="number">4</span>]=<span class="literal">nil</span>,[<span class="number">5</span>]=<span class="string">&quot;e&quot;</span>&#125;</span><br><span class="line"><span class="comment">-- 2.第一个索引不是1		 print:2 0</span></span><br><span class="line">mytable=&#123;[<span class="number">-1</span>]=<span class="string">&quot;a&quot;</span>,[<span class="number">0</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">1</span>]=<span class="string">&quot;c&quot;</span>,[<span class="number">2</span>]=<span class="string">&quot;e&quot;</span>&#125;</span><br><span class="line">mytable=&#123;[<span class="number">-1</span>]=<span class="string">&quot;a&quot;</span>,[<span class="number">0</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">2</span>]=<span class="string">&quot;c&quot;</span>,[<span class="number">3</span>]=<span class="string">&quot;e&quot;</span>&#125;</span><br><span class="line"><span class="comment">-- 3.倒序				print:1</span></span><br><span class="line">mytable=&#123;[<span class="number">1</span>]=<span class="string">&quot;a&quot;</span>,[<span class="number">0</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">-1</span>]=<span class="string">&quot;c&quot;</span>,[<span class="number">-2</span>]=<span class="string">&quot;e&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">table_leng</span><span class="params">(t)</span></span></span><br><span class="line">  <span class="keyword">local</span> leng=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span></span><br><span class="line">    leng=leng+<span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">return</span> leng;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>table.maxn()</p>
+<p>获取数组最大下标（数组不连续时很好用）</p>
+<p>若都是负数索引或者非数字索引，返回0</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print:length=2 maxn=5</span></span><br><span class="line">t=&#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,[<span class="number">5</span>]=<span class="string">&quot;e&quot;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;length=&quot;</span>..#t)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;maxn=&quot;</span>..<span class="built_in">table</span>.<span class="built_in">maxn</span>(t))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>table.insert(table,[pos,]value)</p>
+<p>不是数组类型table时使用小心，获取的length会有问题</p>
+</li>
+<li><p>table.remove(table[,pos])</p>
+<p>删除表元素，表长度改变</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">array = &#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(array) <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> v == <span class="string">&quot;a&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">remove</span>(array, i)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(array) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(i,v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- 并没有删除掉所有的a，原因是每一次删除完一个元素之后，array已经没有了那个值，再次遍历时的i其实已经是新array的i了</span></span><br><span class="line"><span class="comment">--[[ print:</span></span><br><span class="line"><span class="comment">1a</span></span><br><span class="line"><span class="comment">2b</span></span><br><span class="line"><span class="comment">3a</span></span><br><span class="line"><span class="comment">4b</span></span><br><span class="line"><span class="comment">]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 所以这样删除 从后往前删除</span></span><br><span class="line">array = &#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i=#array,<span class="number">1</span>,<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">if</span> array[i] == <span class="string">&quot;a&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">remove</span>(array, i)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(array) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(i,v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- print:1b 2b</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1.table.remove(table,pos) 返回值为对应pos的值 pos为空时删除最后一个元素 删除结束移动元素位置</span></span><br><span class="line"><span class="comment">-- print:1a 2c 3d 1a 2c 3d 3 b</span></span><br><span class="line">mytable=&#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>,<span class="string">&quot;d&quot;</span>&#125;</span><br><span class="line">n=<span class="built_in">table</span>.<span class="built_in">remove</span>(mytable,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(mytable) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(k..v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(mytable) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(k..v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(#mytable)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="comment">-- 2.nil 直接元素置空 不会移动位置 表中会有个空洞 #或者table.getn()获取长度不行</span></span><br><span class="line"><span class="comment">-- print:1a 3c 4d 1a 4 nil</span></span><br><span class="line">mytable=&#123;<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>,<span class="string">&quot;d&quot;</span>&#125;</span><br><span class="line">mytable[<span class="number">2</span>]=<span class="literal">nil</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(mytable) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(k..v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">ipairs</span>(mytable) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(k..v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">print</span>(#mytable)</span><br><span class="line"><span class="built_in">print</span>(mytable[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>table.sort(table[,comp])</p>
+<p>排序，可以自定义排序规则</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">array = &#123;<span class="string">&quot;egg&quot;</span>,<span class="string">&quot;dophin&quot;</span>,<span class="string">&quot;ai&quot;</span>,<span class="string">&quot;con&quot;</span>,<span class="string">&quot;body&quot;</span>&#125;</span><br><span class="line"><span class="comment">-- print:egg dophin ai con body</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">table</span>.<span class="built_in">sort</span>(array)</span><br><span class="line"><span class="comment">-- print:ai body con dophin egg</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">table</span>.<span class="built_in">sort</span>(array,<span class="function"><span class="keyword">function</span><span class="params">(e1,e2)</span></span></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">string</span>.<span class="built_in">len</span>(e1)&lt;<span class="built_in">string</span>.<span class="built_in">len</span>(e2)</span><br><span class="line"><span class="keyword">end</span>)</span><br><span class="line"><span class="comment">-- print:ai con egg body dophin</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>table.concat(…)</p>
+<p>以特定形式连接表中数据，只处理table中下标是数字，从1开始，连续不断开的数据</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">t=&#123;a=<span class="number">1</span>,<span class="number">8</span>,<span class="string">&quot;name&quot;</span>,[<span class="number">9</span>]=<span class="string">&quot;id&quot;</span>,<span class="string">&quot;age&quot;</span>,<span class="string">&quot;time&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(t) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(v)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- print:8  name  age  time  1  id</span></span><br><span class="line"></span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- print:8nameagetime</span></span><br><span class="line"><span class="comment">-- 只处理数字下标 下标从一开始 断开就结束</span></span><br><span class="line"></span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t,<span class="string">&quot;-&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- print:8-name-age-time</span></span><br><span class="line"><span class="comment">-- 第二个参数为连接字符串，默认连接字符串是空串</span></span><br><span class="line"></span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t,<span class="string">&quot;-&quot;</span>,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- print:name-age-time</span></span><br><span class="line"><span class="comment">-- 第三个参数为起始位置</span></span><br><span class="line"></span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t,<span class="string">&quot;-&quot;</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- print:name-age</span></span><br><span class="line"><span class="comment">-- 第四个参数为结束位置</span></span><br><span class="line"></span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t,<span class="string">&quot;-&quot;</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- error</span></span><br><span class="line"><span class="comment">-- 真正符合连接的数据只有4个 报错</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">t=&#123;[<span class="number">1</span>]=<span class="string">&quot;a&quot;</span>,[<span class="number">2</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">3</span>]=<span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- print:abc</span></span><br><span class="line"></span><br><span class="line">t=&#123;[<span class="number">2</span>]=<span class="string">&quot;b&quot;</span>,[<span class="number">3</span>]=<span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">a=<span class="built_in">table</span>.<span class="built_in">concat</span>(t)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment">-- print:		(空串)</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-table/" data-id="ckzth8cc6000drwu6cm9u8lad" data-title="Lua-table" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-math" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-math/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.477Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-math/">Lua-math</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">math</span>.<span class="built_in">abs</span>()				   <span class="comment">-- 绝对值</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">max</span>()/<span class="built_in">math</span>.<span class="built_in">min</span>()		<span class="comment">-- 返回最大/最小数</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">ceil</span>()/<span class="built_in">math</span>.<span class="built_in">floor</span>()	<span class="comment">-- 向上取整/向下取整</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">fmod</span>()/<span class="built_in">math</span>.<span class="built_in">modf</span>()		<span class="comment">-- 取余/返回数的整数和小数部分</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">random</span>([m[,n]])</span><br><span class="line"><span class="comment">-- 不传参 返回[0,1)	一个参 返回[1,m]内整数	两个参 返回[m,n]整数</span></span><br><span class="line"><span class="built_in">math</span>.<span class="built_in">randomseed</span>(x)			<span class="comment">-- 随机数种子</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-math/" data-id="ckzth8cc5000brwu68gnmhpqe" data-title="Lua-math" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.477Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-%E5%9F%BA%E7%A1%80/">Lua-基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>学习Lua记录</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1.nil </span></span><br><span class="line"><span class="comment">-- 判断类型 类型名为字符串</span></span><br><span class="line"><span class="built_in">type</span>(x)==<span class="literal">nil</span>	<span class="literal">false</span></span><br><span class="line"><span class="built_in">type</span>(x)==<span class="string">&quot;nil&quot;</span>	<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2.boolean</span></span><br><span class="line"><span class="comment">-- false,nil都为假</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 3.number</span></span><br><span class="line"><span class="comment">-- 默认双精度浮点数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 4.string</span></span><br><span class="line"><span class="comment">-- 双引号或单引号 [[...]]表示一块字符串</span></span><br><span class="line"><span class="comment">-- 字符串长度 #string</span></span><br><span class="line">s=<span class="string">&quot;helloworld&quot;</span>;</span><br><span class="line"><span class="built_in">print</span>(#s);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 5.table</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 6.function</span></span><br><span class="line"><span class="comment">-- 匿名函数方式传参</span></span><br><span class="line"><span class="comment">-- f1.lua</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testFun</span><span class="params">(tab,fun)</span></span></span><br><span class="line">    <span class="keyword">for</span> k ,v <span class="keyword">in</span> <span class="built_in">pairs</span>(tab) <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">print</span>(fun(k,v));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- f2.lua </span></span><br><span class="line">tab=&#123;key1=<span class="string">&quot;val1&quot;</span>,key2=<span class="string">&quot;val2&quot;</span>&#125;;</span><br><span class="line">testFun(tab,</span><br><span class="line"><span class="function"><span class="keyword">function</span><span class="params">(key,val)</span></span><span class="comment">--匿名函数</span></span><br><span class="line">    <span class="keyword">return</span> key..<span class="string">&quot;=&quot;</span>..val;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 7.thread</span></span><br><span class="line"><span class="comment">-- 用于协同程序多点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 8.userdata</span></span><br><span class="line"><span class="comment">-- 自定义类型 一般C/C++的struct和指针调用</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> a,b=<span class="number">3</span>,<span class="number">5</span>;</span><br><span class="line"><span class="keyword">local</span> a,b=fun();</span><br><span class="line">a,b=b,a</span><br></pre></td></tr></table></figure>
+
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- while</span></span><br><span class="line">a=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(a&lt;<span class="number">5</span>) <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">print</span>(a);</span><br><span class="line">	a=a+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- for</span></span><br><span class="line"><span class="keyword">for</span> i=<span class="number">5</span>,<span class="number">1</span>,<span class="number">-1</span> <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(i);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- for fun()</span></span><br><span class="line"><span class="comment">-- fun()只在循环开始前执行一次</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(x)</span></span>  </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;fun&quot;</span>)  </span><br><span class="line">    <span class="keyword">return</span> x*<span class="number">2</span>   </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span>,f(<span class="number">5</span>) <span class="keyword">do</span> </span><br><span class="line">    <span class="built_in">print</span>(i)  </span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="comment">-- 输出：fun 1 2 3 4 5 6 7 8 9 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- for 数组 ipairs</span></span><br><span class="line">a = &#123;<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">ipairs</span>(a) <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">print</span>(i, v)</span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">-- for table pairs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- break 退出</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 函数作为参数</span></span><br><span class="line">myprint = <span class="function"><span class="keyword">function</span><span class="params">(param)</span></span></span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;这是打印函数 -   ##&quot;</span>,param,<span class="string">&quot;##&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(num1,num2,functionPrint)</span></span></span><br><span class="line">   result = num1 + num2</span><br><span class="line">   functionPrint(result)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">myprint(<span class="number">10</span>)</span><br><span class="line">add(<span class="number">2</span>,<span class="number">5</span>,myprint)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 可变参数函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(...)</span></span>  </span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span>, <span class="built_in">select</span>(<span class="string">&#x27;#&#x27;</span>, ...) <span class="keyword">do</span>  <span class="comment">--&gt;获取参数总数</span></span><br><span class="line">        <span class="keyword">local</span> <span class="built_in">arg</span> = <span class="built_in">select</span>(i, ...); <span class="comment">--&gt;读取参数</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;arg&quot;</span>, <span class="built_in">arg</span>);  </span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span>  </span><br><span class="line"></span><br><span class="line">foo(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);  </span><br></pre></td></tr></table></figure>
+
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span> <span class="keyword">or</span> <span class="keyword">not</span></span><br><span class="line">..(字符串连接)</span><br><span class="line">#(字符串或表长度)</span><br></pre></td></tr></table></figure>
+
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">&quot;helloworld&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 长度</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">len</span>(s);					</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 拼接</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">rep</span>(s,<span class="number">3</span>);				<span class="comment">--string重复三次</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 大小写转换</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">lower</span>(s);	</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">upper</span>(s);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 反转</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">reverse</span>(s);				</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 截取</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">sub</span>(s,i,j);				</span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">sub</span>(s,j,<span class="number">-1</span>);				<span class="comment">---1代表最后一个 -2倒数第二个</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字符转换</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">char</span>(<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>);			<span class="comment">--abc</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">byte</span>(<span class="string">&quot;abc&quot;</span>,<span class="number">2</span>);			<span class="comment">--98</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 格式化</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%.4f&quot;</span>,<span class="built_in">math</span>.<span class="built_in">pi</span>)	<span class="comment">--3.1416</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%02d/%02d/%04d&quot;</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1990</span>)	<span class="comment">--01/01/1990</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">&quot;%s&quot;</span>,<span class="string">&quot;hi&quot;</span>);		<span class="comment">--hi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 字符串匹配</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&quot;wo&quot;</span>);			<span class="comment">--6 7</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&quot;wo&quot;</span>,<span class="number">5</span>);			<span class="comment">--6 7</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">find</span>(s,<span class="string">&quot;%d&quot;</span>,<span class="number">1</span>);  		<span class="comment">--nil	%d表示查找数字</span></span><br><span class="line"><span class="comment">-- 返回第一个匹配字符串</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">match</span>(s,<span class="string">&quot;wo&quot;</span>);			<span class="comment">--wo</span></span><br><span class="line"><span class="comment">-- 返回迭代器函数 每次调用返回一个符合条件的字符串</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">gmatch</span>(s,str);</span><br><span class="line">attrstr = <span class="string">&quot;from=world, to=Lua, name=AlbertS&quot;</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">string</span>.<span class="built_in">gmatch</span>(attrstr, <span class="string">&quot;(%w+)=(%w+)&quot;</span>) <span class="keyword">do</span> </span><br><span class="line">    <span class="built_in">print</span>(k, v) </span><br><span class="line"><span class="keyword">end</span>		<span class="comment">-- 返回key=value的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 替换 返回替换后内容</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(s,<span class="string">&quot;wo&quot;</span>,<span class="string">&quot;-&quot;</span>);		<span class="comment">--hello-rld</span></span><br><span class="line"><span class="built_in">string</span>.<span class="built_in">gsub</span>(<span class="string">&quot;aaaa&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;z&quot;</span>,<span class="number">3</span>);	<span class="comment">--zzza</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- string patterns</span></span><br><span class="line">.	:所有字符</span><br><span class="line">%c	:所有控制字符</span><br><span class="line">%p	:所有标点符号</span><br><span class="line">%s	:所有空白字符</span><br><span class="line">%w	:所有字母和数字</span><br><span class="line"></span><br><span class="line">%a	:所有字母</span><br><span class="line">%u	:所有大写字母</span><br><span class="line">%l	:所有小写字母</span><br><span class="line"></span><br><span class="line">%d	:所有十进制数字</span><br><span class="line">%x	:所有十六进制数字</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-%E5%9F%BA%E7%A1%80/" data-id="ckzthth2s001ydcu68lh4ffu8" data-title="Lua-基础" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-冒号点号" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-%E5%86%92%E5%8F%B7%E7%82%B9%E5%8F%B7/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.477Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-%E5%86%92%E5%8F%B7%E7%82%B9%E5%8F%B7/">Lua-冒号点号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>关于冒号（:）与点号（.）</p>
+<p>冒号自带隐藏self，点号不带self，方法用冒号</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class=&#123;x=1&#125;</span><br><span class="line"></span><br><span class="line">--冒号+方法</span><br><span class="line">function class:print()</span><br><span class="line">	print(self.x);</span><br><span class="line">end</span><br><span class="line">--点号+self</span><br><span class="line">function class.print(self)</span><br><span class="line">	print(self.x);</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">--冒号调用</span><br><span class="line">class:print();</span><br><span class="line">--点号调用</span><br><span class="line">class.print(class);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-%E5%86%92%E5%8F%B7%E7%82%B9%E5%8F%B7/" data-id="ckzthtk460020dcu65zx93zz7" data-title="Lua-冒号点号" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Lua-协程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-%E5%8D%8F%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.476Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Lua-%E5%8D%8F%E7%A8%8B/">Lua-协程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">suspended</span></span><br><span class="line"><span class="comment">hi</span></span><br><span class="line"><span class="comment">dead</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">		<span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">2</span> <span class="keyword">do</span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">			<span class="built_in">coroutine</span>.<span class="built_in">yield</span>();</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">hi</span></span><br><span class="line"><span class="comment">suspended</span></span><br><span class="line"><span class="comment">hi</span></span><br><span class="line"><span class="comment">suspended</span></span><br><span class="line"><span class="comment">dead</span></span><br><span class="line"><span class="comment">dead</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参数及返回值"><a href="#参数及返回值" class="headerlink" title="参数及返回值"></a>参数及返回值</h4><ul>
+<li>create：返回coroutine，参数是函数</li>
+<li>resume：返回bool值 </li>
+<li>yield：挂起</li>
+<li>status：返回状态</li>
+<li>wrap：返回一个函数，调用这个函数时就开始执行，相当于create+resume</li>
+<li>running：返回运行的coroutine</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bool + 函数返回参数</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">4</span>,<span class="number">5</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">true 4 5</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bool + 传入参数多少</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(a,b)</span></span></span><br><span class="line">		<span class="built_in">print</span>(a,b);</span><br><span class="line">		<span class="built_in">coroutine</span>.<span class="built_in">yield</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">1 2 </span></span><br><span class="line"><span class="comment">true</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bool + yield所有参数</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(a,b)</span></span></span><br><span class="line">		<span class="built_in">print</span>(a,b);</span><br><span class="line">		<span class="built_in">coroutine</span>.<span class="built_in">yield</span>(a+b,a-b,a*b,a/b);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">true 3 -1 2 0.5			--所有传递给yield的参数都将返回</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- wrap</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">wrap</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(a)</span></span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>*a;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line">c=co(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">print</span>(c);</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-%E5%8D%8F%E7%A8%8B/" data-id="ckzthtmm00022dcu64fpbfioi" data-title="Lua-协程" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CSharp接口" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/CSharp%E6%8E%A5%E5%8F%A3/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.464Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C#</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/CSharp%E6%8E%A5%E5%8F%A3/">C#接口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>继承接口后，我们需要实现接口的方法 MethodToImplement() , 方法名必须与接口定义的方法名一致</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line"></span><br><span class="line">interface IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    // 接口成员</span><br><span class="line">    void MethodToImplement();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class InterfaceImplementer : IMyInterface</span><br><span class="line">&#123;</span><br><span class="line">    static void Main()</span><br><span class="line">    &#123;</span><br><span class="line">        InterfaceImplementer iImp = new InterfaceImplementer();</span><br><span class="line">        iImp.MethodToImplement();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void MethodToImplement()</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(&quot;MethodToImplement() called.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/CSharp%E6%8E%A5%E5%8F%A3/" data-id="ckzthryy2001edcu64lymfsaw" data-title="C#接口" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Lua-协程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="简介示例1234567891011121314co&#x3D;coroutine.create(	function()		print(&quot;hi&quot;);	end)print(coroutine.status(co));coroutine.resume(co);print(coroutine.status(co));--[[print:suspendedhidead]]  12345678910">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua-协程">
+<meta property="og:url" content="http://example.com/2022/02/19/Lua-%E5%8D%8F%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介示例1234567891011121314co&#x3D;coroutine.create(	function()		print(&quot;hi&quot;);	end)print(coroutine.status(co));coroutine.resume(co);print(coroutine.status(co));--[[print:suspendedhidead]]  12345678910">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-19T06:41:38.476Z">
+<meta property="article:modified_time" content="2022-02-19T07:01:58.359Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Lua-协程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-%E5%8D%8F%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.476Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Lua-协程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">suspended</span></span><br><span class="line"><span class="comment">hi</span></span><br><span class="line"><span class="comment">dead</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">		<span class="keyword">for</span> i=<span class="number">1</span>,<span class="number">2</span> <span class="keyword">do</span></span><br><span class="line">			<span class="built_in">print</span>(<span class="string">&quot;hi&quot;</span>);</span><br><span class="line">			<span class="built_in">coroutine</span>.<span class="built_in">yield</span>();</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"></span><br><span class="line"><span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co);</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">status</span>(co));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">hi</span></span><br><span class="line"><span class="comment">suspended</span></span><br><span class="line"><span class="comment">hi</span></span><br><span class="line"><span class="comment">suspended</span></span><br><span class="line"><span class="comment">dead</span></span><br><span class="line"><span class="comment">dead</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参数及返回值"><a href="#参数及返回值" class="headerlink" title="参数及返回值"></a>参数及返回值</h4><ul>
+<li>create：返回coroutine，参数是函数</li>
+<li>resume：返回bool值 </li>
+<li>yield：挂起</li>
+<li>status：返回状态</li>
+<li>wrap：返回一个函数，调用这个函数时就开始执行，相当于create+resume</li>
+<li>running：返回运行的coroutine</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bool + 函数返回参数</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">4</span>,<span class="number">5</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">true 4 5</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bool + 传入参数多少</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(a,b)</span></span></span><br><span class="line">		<span class="built_in">print</span>(a,b);</span><br><span class="line">		<span class="built_in">coroutine</span>.<span class="built_in">yield</span>();</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">1 2 </span></span><br><span class="line"><span class="comment">true</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- bool + yield所有参数</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">create</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(a,b)</span></span></span><br><span class="line">		<span class="built_in">print</span>(a,b);</span><br><span class="line">		<span class="built_in">coroutine</span>.<span class="built_in">yield</span>(a+b,a-b,a*b,a/b);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">coroutine</span>.<span class="built_in">resume</span>(co,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">true 3 -1 2 0.5			--所有传递给yield的参数都将返回</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- wrap</span></span><br><span class="line">co=<span class="built_in">coroutine</span>.<span class="built_in">wrap</span>(</span><br><span class="line">	<span class="function"><span class="keyword">function</span><span class="params">(a)</span></span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">2</span>*a;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line">c=co(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">print</span>(c);</span><br><span class="line"><span class="comment">--[[print:</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-%E5%8D%8F%E7%A8%8B/" data-id="ckzthtmm00022dcu64fpbfioi" data-title="Lua-协程" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/19/Lua-%E5%86%92%E5%8F%B7%E7%82%B9%E5%8F%B7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Lua-冒号点号
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/19/CSharp%E6%8E%A5%E5%8F%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">C#接口</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

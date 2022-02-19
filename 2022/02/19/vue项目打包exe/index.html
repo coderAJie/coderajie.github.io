@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vue项目打包exe | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="准备工作 安装vue 12npm install -g @vue&#x2F;clinpm install -g @vue&#x2F;cli-init  创建项目vue 1vue init webpack my-vue-project  安装electron 1npm install -g electron  安装electron打包工具 1npm install -g electron-packager  打包EXE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue项目打包exe">
+<meta property="og:url" content="http://example.com/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="准备工作 安装vue 12npm install -g @vue&#x2F;clinpm install -g @vue&#x2F;cli-init  创建项目vue 1vue init webpack my-vue-project  安装electron 1npm install -g electron  安装electron打包工具 1npm install -g electron-packager  打包EXE">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-19T06:42:44.660Z">
+<meta property="article:modified_time" content="2022-02-19T06:57:06.921Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vue项目打包exe" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:42:44.660Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/VUE/">VUE</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue项目打包exe
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ul>
+<li><p>安装vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br><span class="line">npm install -g @vue/cli-init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建项目vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack my-vue-project</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装electron</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g electron</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装electron打包工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g electron-packager</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="打包EXE"><a href="#打包EXE" class="headerlink" title="打包EXE"></a>打包EXE</h4><ol>
+<li><p><code>my-vue-project</code>：找到<code>config/index.js</code>文件；修改 <code>assetsPublicPath</code>的路径；文件中<code>dev</code>和<code>build</code>有两处使用到，请注意修改build处</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">	...</span><br><span class="line">	assetsPublicPath: &#x27;./&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>my-vue-project</code>：打包项目，生存文件夹<code>dist</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：将<code>dist</code>文件夹放在根目录，修改<code>main.js</code>文件，删除<code>index.html</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mainWindow.loadFile(&#x27;dist/index.html&#x27;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：执行命令运行查看运行效果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure>
+
+<p>此时应该可以看到vue项目变成了exe文件的形式在运行</p>
+</li>
+<li><p><code>electron</code>：下载打包所需的依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-packager --save-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：打开<code>package.json</code>，在<code>scripts</code>中添加打包命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123; </span><br><span class="line">	&quot;start&quot;: &quot;electron .&quot;, </span><br><span class="line">	&quot;packager&quot;: &quot;electron-packager ./ App --platform=win32 --arch=x64 --overwrite&quot;//此处为添加命令</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你想修改最后打包出来的exe文件图标，类似于favicon，或者EXE的名字，可以设置 packager 的指令内容为，icon的路径自己调整下，更多配置内容请查阅文档： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;packager&quot;: &quot;electron-packager ./ YOUR_APP_NAME --platform=win32 --arch=x64 --icon=./dist/favicon.ico --overwrite&quot; </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：打包项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run packager</span><br></pre></td></tr></table></figure>
+
+<p>到此，就生成了EXE的可执行文件，但是是一个文件夹，需要进行整个文件夹的压缩封装</p>
+</li>
+</ol>
+<h4 id="生成EXE安装程序"><a href="#生成EXE安装程序" class="headerlink" title="生成EXE安装程序"></a>生成EXE安装程序</h4><p> InnoSetup下载、安装、打包</p>
+<p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/benpaodejiandan/p/7081011.html">开源Inno Setup官网下载、安装、打包教程（官网安装向导中文语言包） - 奔跑的简单 - 博客园 (cnblogs.com)</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/" data-id="ckzth8cca000krwu61y3c3iit" data-title="vue项目打包exe" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue项目打包apk</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

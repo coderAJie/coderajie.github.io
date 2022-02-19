@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Lua-os | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="简介实例 os.clock(time) 返回执行该程序CPU花去的时钟秒数 1234567start&#x3D;os.clock()while true do	if os.clock()-start&gt;3 then		start&#x3D;os.clock()		print(&quot;111&quot;)	endend  os.date(time) 返回时间字符串 格式化形式多 12345678910-- 本地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua-os">
+<meta property="og:url" content="http://example.com/2022/02/19/Lua-os/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介实例 os.clock(time) 返回执行该程序CPU花去的时钟秒数 1234567start&#x3D;os.clock()while true do	if os.clock()-start&gt;3 then		start&#x3D;os.clock()		print(&quot;111&quot;)	endend  os.date(time) 返回时间字符串 格式化形式多 12345678910-- 本地">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-19T06:41:38.479Z">
+<meta property="article:modified_time" content="2022-02-19T06:57:55.436Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Lua-os" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Lua-os/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.479Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Lua/">Lua</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Lua-os
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><ul>
+<li><p>os.clock(time) 返回执行该程序CPU花去的时钟秒数</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start=<span class="built_in">os</span>.<span class="built_in">clock</span>()</span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">os</span>.<span class="built_in">clock</span>()-start&gt;<span class="number">3</span> <span class="keyword">then</span></span><br><span class="line">		start=<span class="built_in">os</span>.<span class="built_in">clock</span>()</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">&quot;111&quot;</span>)</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.date(time) 返回时间字符串 格式化形式多</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 本地时间</span></span><br><span class="line"><span class="keyword">local</span> timetable = <span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;*t&quot;</span>, <span class="built_in">os</span>.<span class="built_in">time</span>());   </span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">pairs</span>(timetable) <span class="keyword">do</span></span><br><span class="line">      <span class="built_in">print</span>(i, v);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- ！格林尼治时间</span></span><br><span class="line"><span class="keyword">local</span> utimetable = <span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;!*t&quot;</span>, <span class="built_in">os</span>.<span class="built_in">time</span>()); </span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">pairs</span>(utimetable) <span class="keyword">do</span></span><br><span class="line">      <span class="built_in">print</span>(i, v);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.time([table]) 返回当前系统的时间</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- print:1540433633		0	01/01/70 08:00:00	01/01/70 00:00:00</span></span><br><span class="line"><span class="comment">-- 北京时间的1970-1-1 08:00:00是0时区时间的1970-1-1 00:00:00</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">time</span>())</span><br><span class="line"></span><br><span class="line">t=&#123;year=<span class="number">1970</span>,month=<span class="number">1</span>,day=<span class="number">1</span>,hour=<span class="number">8</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">time</span>(t))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;%c&quot;</span>,<span class="built_in">os</span>.<span class="built_in">time</span>(t)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">&quot;!%c&quot;</span>,<span class="built_in">os</span>.<span class="built_in">time</span>(t)))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.difftime(t1,t2) 时间差值 返回秒数</p>
+</li>
+<li><p>os.execute([command]) 调用系统的很多函数 可以复制文件 暂停 等等</p>
+</li>
+<li><p>os.exit() 退出程序</p>
+</li>
+<li><p>os.getenv(name) 查询系统环境变量 程序路径 系统盘符</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;SystemRoot&quot;</span>))          <span class="comment">-- 系统根目录</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;WoXiaXieDe&quot;</span>))          <span class="comment">-- 我乱写的</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;ALLUSERSPROFILE&quot;</span>))     <span class="comment">-- 所有“用户配置文件”的位置</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;alluserSpRoFilE&quot;</span>))     <span class="comment">-- 所有“用户配置文件”的位置</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;COMPUTERNAME&quot;</span>))        <span class="comment">-- 计算机的名称</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;COMSPEC&quot;</span>))             <span class="comment">-- 命令行解释器可执行程序的准确路径</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;HOMEDRIVE&quot;</span>))           <span class="comment">-- 连接到用户主目录的本地工作站驱动器号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;HOMEPATH&quot;</span>))            <span class="comment">-- 用户主目录的完整路径</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;NUMBER_OF_PROCESSORS&quot;</span>))<span class="comment">-- 安装在计算机上的处理器的数目</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;OS&quot;</span>))                  <span class="comment">-- 操作系统的名称</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;PROCESSOR_LEVEL&quot;</span>))     <span class="comment">-- 计算机上安装的处理器的型号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;PATHEXT&quot;</span>))             <span class="comment">-- 连接到用户主目录的本地工作站驱动器号</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;PROCESSOR_REVISION&quot;</span>))  <span class="comment">-- 处理器修订号的系统变量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;TEMP&quot;</span>))                <span class="comment">-- 临时目录</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">os</span>.<span class="built_in">getenv</span>(<span class="string">&quot;SYSTEMDRIVE&quot;</span>))         <span class="comment">-- 系统根目录的驱动器</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>os.remove(file) 删除文件</p>
+</li>
+<li><p>os.rename(oldname,newname) 重命名</p>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/4814025">https://www.jianshu.com/nb/4814025</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Lua-os/" data-id="ckzth8cc6000crwu69ygz5uhf" data-title="Lua-os" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/19/Shader-%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Shader-基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/19/Lua-%E5%85%83%E8%A1%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Lua-元表</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

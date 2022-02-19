@@ -71,12 +71,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-vue项目打包exe" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/02/15/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2022-02-15T09:47:55.186Z" itemprop="datePublished">2022-02-15</time>
+    <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:42:44.660Z" itemprop="datePublished">2022-02-19</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/VUE/">VUE</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -85,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/02/15/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
     </h1>
   
 
@@ -93,24 +97,1067 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ul>
+<li><p>安装vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br><span class="line">npm install -g @vue/cli-init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建项目vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack my-vue-project</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装electron</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g electron</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装electron打包工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g electron-packager</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="打包EXE"><a href="#打包EXE" class="headerlink" title="打包EXE"></a>打包EXE</h4><ol>
+<li><p><code>my-vue-project</code>：找到<code>config/index.js</code>文件；修改 <code>assetsPublicPath</code>的路径；文件中<code>dev</code>和<code>build</code>有两处使用到，请注意修改build处</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">	...</span><br><span class="line">	assetsPublicPath: &#x27;./&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>my-vue-project</code>：打包项目，生存文件夹<code>dist</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：将<code>dist</code>文件夹放在根目录，修改<code>main.js</code>文件，删除<code>index.html</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mainWindow.loadFile(&#x27;dist/index.html&#x27;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：执行命令运行查看运行效果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>此时应该可以看到vue项目变成了exe文件的形式在运行</p>
+</li>
+<li><p><code>electron</code>：下载打包所需的依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-packager --save-dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：打开<code>package.json</code>，在<code>scripts</code>中添加打包命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123; </span><br><span class="line">	&quot;start&quot;: &quot;electron .&quot;, </span><br><span class="line">	&quot;packager&quot;: &quot;electron-packager ./ App --platform=win32 --arch=x64 --overwrite&quot;//此处为添加命令</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>如果你想修改最后打包出来的exe文件图标，类似于favicon，或者EXE的名字，可以设置 packager 的指令内容为，icon的路径自己调整下，更多配置内容请查阅文档： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;packager&quot;: &quot;electron-packager ./ YOUR_APP_NAME --platform=win32 --arch=x64 --icon=./dist/favicon.ico --overwrite&quot; </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>electron</code>：打包项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run packager</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>到此，就生成了EXE的可执行文件，但是是一个文件夹，需要进行整个文件夹的压缩封装</p>
+</li>
+</ol>
+<h4 id="生成EXE安装程序"><a href="#生成EXE安装程序" class="headerlink" title="生成EXE安装程序"></a>生成EXE安装程序</h4><p> InnoSetup下载、安装、打包</p>
+<p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/benpaodejiandan/p/7081011.html">开源Inno Setup官网下载、安装、打包教程（官网安装向导中文语言包） - 奔跑的简单 - 博客园 (cnblogs.com)</a> </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/02/15/hello-world/" data-id="ckznyc2xu000024u69tzqbd0x" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/" data-id="ckzth8cca000krwu61y3c3iit" data-title="vue项目打包exe" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-vue项目打包apk" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:42:44.654Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/VUE/">VUE</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ul>
+<li><p>安装vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br><span class="line">npm install -g @vue/cli-init</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建项目vue</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack my-vue-project</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装cordova相关</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cordova</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="cordova项目内打包"><a href="#cordova项目内打包" class="headerlink" title="cordova项目内打包"></a>cordova项目内打包</h4><ol>
+<li><p><code>my-vue-project</code>：找到<code>config/index.js</code>文件；修改 <code>assetsPublicPath</code>的路径；文件中<code>dev</code>和<code>build</code>有两处使用到，请注意修改build处</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">	...</span><br><span class="line">	assetsPublicPath: &#x27;./&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>my-vue-project</code>：打包项目，生存文件夹<code>dist</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cordova</code>：创建cordova项目，new-cordova是项目名称，com.my.vue2apk是包名，vue2apk是程序的标题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova create new-cordova com.my.vue2apk vue2apk</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cordova</code>：将刚才在vue项目中打包生成的dist文件夹下面的index.html和static文件夹复制到www文件夹下面，将原先www文件夹下面的所有文件删除。</p>
+</li>
+<li><p><code>cordova</code>：打包cordova项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova platforms add android --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>cordova</code>：生成apk文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova build android</span><br></pre></td></tr></table></figure>
+
+<p>此时生成的文件就可以正常在模拟器安装，但是缺少了签名，之后需要进行签名生成重新打包，在此不做深究</p>
+</li>
+</ol>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><blockquote>
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21963133/article/details/88546086">前端VUE项目打包成安卓APP_氵易风灬的博客-CSDN博客_vue打包成app</a> </p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/" data-id="ckzth8cca000jrwu6hkbahzkx" data-title="vue项目打包apk" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2022新年flag" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.511Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>工作：一个满意的双休</li>
+<li>存款：15万，年底攒够首付</li>
+<li>旅游：1次</li>
+<li>算法：LeetCode200道</li>
+<li>锻炼：长胖20斤</li>
+<li>看书：5本</li>
+<li>项目：5个，小游戏或者app都行</li>
+<li>理财：开个股票账户2000块试水，基金5%收益</li>
+<li>电脑：配个电脑</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/" data-id="ckzth8caf0000rwu6f1a08au1" data-title="2022新年flag" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-个人博客捣鼓总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.501Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="Jekyll"><a href="#Jekyll" class="headerlink" title="Jekyll"></a>Jekyll</h4><p>Github原生支持自动编译，很方便，但是缺点也有，个人最开始使用，最后想换其他的。<br>只需要直接仓库中提交你所编写的Markdown文件即可，Github会进行自动编译，很方便，你只需要提交文件即可，不需要运行任何命令行等等，不需要本地电脑下载各种软件环境配置等等，纯免费</p>
+<hr>
+<h4 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h4><p>当时是遇到Jekyll对于Markdown编写的文件会去进行编译检查啥的，反正就是我的文件中，因为代码引用比较频繁，遇到了一些语法，但是Jekyll编译失败，找了一下解决方案，要么改文件，要么很麻烦不好弄，所以弃用，选择Hexo<br>选择了Hexo之后，发现其实他也有这样的问题，但是已经开始捣鼓了，就继续进行研究了一番。<br>个人感觉很麻烦，你最好需要本地安装软件环境，编写Markdown文件之后，需要进行命令行操作，然后生成了静态网页，会关联到你的Github上更新（当然也有可视化的界面不用命令行）<br>需要本地环境部署软件，突然到新的电脑，需要又进行部署比较烦（当然网上有人部署在自己服务器或者其他的方式，但是很烦，也好复杂）</p>
+<hr>
+<h4 id="Typecho"><a href="#Typecho" class="headerlink" title="Typecho"></a>Typecho</h4><p>想要拥有一款随时随地有浏览器就行，就可以编写上传查看自己的文档，类似简书这种，但是用的自己的服务器网址等等，个人还超级喜欢简洁的风格，后期可能自己想要进行一些threejs的3D网站风格改写，所以看到了Typecho，蛮合适的，但是得自己买个服务器，操作其实不太复杂<br>暂时想了想，还是继续在简书写好了，但是后续肯定是要有自己的小窝的，慢慢来</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/" data-id="ckzth8ccb000lrwu6bans018c" data-title="个人博客捣鼓总结" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Git命令行" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.500Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Git相关操作"><a href="#Git相关操作" class="headerlink" title="Git相关操作"></a>Git相关操作</h3><h4 id="简单操作"><a href="#简单操作" class="headerlink" title="简单操作"></a>简单操作</h4><ol>
+<li><p>提交：git commit</p>
+</li>
+<li><p>创建分支：git branch bugFix</p>
+</li>
+<li><p>切换分支：git checkout bugFix</p>
+</li>
+<li><p>创建并切换分支： git checkout -b bugFix </p>
+</li>
+<li><p>合并分支：</p>
+<ul>
+<li>git merge bugFix，先切换到main分支，然后将bugFix合并过来</li>
+<li>git rebase main，先切换到bugFix分支，然后rebase主分支到bugFix分支，这样bugFix的提交记录就都在main的之后了</li>
+<li>git rebase main bugFix：不管当前HEAD是在哪都行，相当于先切换到bugFix分支，再进行与main分支合并</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="一些特性"><a href="#一些特性" class="headerlink" title="一些特性"></a>一些特性</h4><ol>
+<li><p>HEAD：</p>
+<ul>
+<li><p>Git实际上维护的是一串历史记录，每个历史标号都是一条记录的id</p>
+</li>
+<li><p>不同的分支表示不同的指针，指向某一个历史标号，沿着那个标号往前，可以查看所有的历史记录，每一个分支有自己的指针，例如main，bugFix</p>
+</li>
+<li><p>HEAD也是一个指针，只是我们经常情况下将其和分支指针指向同一个历史记录</p>
+</li>
+<li><p>git checkout bugFix：切换分支</p>
+<p> git checkout commitId：HEAD指针指向某一个提交记录</p>
+</li>
+</ul>
+<p>使用场景：省却了建分支删分支的很多麻烦</p>
+<ul>
+<li>如果临时想基于某个commit做变更，试试新方案是否可行，就可以采用分离头指针的方式。测试后发现新方案不成熟，直接reset回其他分支即可，省去了建、删分支的麻烦，git会忽略管理这个没有分支commit</li>
+<li>进行到某个commit，试试新方案，为该commit建立新的branch，可以进行特性开发</li>
+<li>分离头指针对应的commit，你如果认为有用需要保留，那就用新分支把它保留</li>
+<li>如果当下无master分支，可以在分离头指针状态下，git checkout -b master HEAD</li>
+</ul>
+</li>
+<li><p>相对引用：</p>
+<ul>
+<li>git checkout commitId 这种方式不太方便，因为commitId会很长，当然可以提交commitId的前几个字符也可以完全匹配到</li>
+<li>使用相对引用，会从HEAD或者bugFix分支开始计算<ul>
+<li>使用 ^ 向上移动 1 个提交记录，main^</li>
+<li>使用 ~ 向上移动多个提交记录，bugFix ~3，要是不加数字，默认向上 1 个</li>
+</ul>
+</li>
+</ul>
+<p>使用场景：移动分支</p>
+<ul>
+<li>git branch -f main HEAD~3：将main分支强制指向HEAD的前3次提交</li>
+</ul>
+</li>
+<li><p>撤销变更：</p>
+<ul>
+<li><p>git reset HEAD~1：（git reset commitId） 通过把分支记录回退几个提交记录来实现撤销改动。git reset 向上移动分支，原来指向的提交记录就跟从来没有提交过一样</p>
+</li>
+<li><p>在reset后， 之前所做的变更还在，但是处于未加入暂存区状态</p>
+</li>
+<li><p>虽然在你的本地分支中使用 git reset 很方便，但是这种“改写历史”的方法对大家一起使用的远程分支是无效的</p>
+</li>
+</ul>
+<p> <img src="https://upload-images.jianshu.io/upload_images/12172794-d551ddcae181b66a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><p>git revert HEAD~1：（git revert commitId）在我们要撤销的提交记录后面多了一个新提交</p>
+</li>
+<li><p>新提交记录 <code>C2&#39;</code> 引入了更改，刚好用来撤销 <code>C2</code> 这个提交。也就是说 <code>C2&#39;</code> 的状态与 <code>C1</code> 是相同的<br><img src="https://upload-images.jianshu.io/upload_images/12172794-2f336aab33e920bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="自由修改提交树"><a href="#自由修改提交树" class="headerlink" title="自由修改提交树"></a>自由修改提交树</h4><ol>
+<li><p>git cherry-pick commitId：将一些提交复制到当前所在的位置（<code>HEAD</code>）下面</p>
+</li>
+<li><p>git rebase -i HEAD~1：交互式rebase，可以打开UI界面自由选择想要复制rebase的记录，并且随意选择部分删除部分排序等<br><img src="https://upload-images.jianshu.io/upload_images/12172794-e49923cd6741634b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+</ol>
+<hr>
+<h4 id="技巧贴士集合"><a href="#技巧贴士集合" class="headerlink" title="技巧贴士集合"></a>技巧贴士集合</h4><ol>
+<li><p>只提取一个提交记录：开发中寻找bug时，会提交一些打印信息的记录，之后修复了bug，只提取修复bug的记录到主分支</p>
+<ul>
+<li>git cherry-pick commitId：</li>
+<li>git rebase -i HEAD：</li>
+</ul>
+</li>
+<li><p>标签：</p>
+<ul>
+<li>git tag v1 C1：（如果未指定C1，会默认HEAD位置）</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-8ab780709d386490.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li><p>git describe ref：描述离你最近的标签引用</p>
+<p>&lt; tag &gt; _ &lt; num &gt; _ g&lt; hash &gt;：tag表示离ref最近的标签，num表示ref和tag相差几个记录，hash是ref的hash值前几位</p>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-11242e706df67cba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ol start="3">
+<li><p>git checkout main：假设默认正上方的记录是第一个父记录<br><img src="https://upload-images.jianshu.io/upload_images/12172794-1047890d95d8e94e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>git checkout main^2：假设默认正上方的记录是第一个父记录，会到另一个父记录</p>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-733eba626b06a6b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>   git checkout HEAD ~ ^ 2 ~ 2：链式操作<br><img src="https://upload-images.jianshu.io/upload_images/12172794-db50c36ffe9f0e89.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<hr>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><ol>
+<li><p>git fetch：实际上将本地仓库中的远程分支更新成了远程仓库相应分支最新的状态 </p>
+<ul>
+<li>从远程仓库下载本地仓库中缺失的提交记录</li>
+<li>更新本地仓库中的远程分支指针（origin&#x2F;main）</li>
+<li>不会改变你本地仓库的状态，不会更新你的（main）分支，也不会修改你磁盘上的文件</li>
+</ul>
+</li>
+<li><p>git pull：git fetch + git merge origin&#x2F;main</p>
+<p>git pull –rebase：git fetch + git rebase origin&#x2F;main</p>
+</li>
+<li><p>git push：推送</p>
+</li>
+</ol>
+<hr>
+<h4 id="远程技巧"><a href="#远程技巧" class="headerlink" title="远程技巧"></a>远程技巧</h4><ol>
+<li><p>rebase： 仁者见仁，智者见智</p>
+<ul>
+<li><p>优点： 使你的提交树变得很干净, 所有的提交都在一条线上</p>
+</li>
+<li><p>缺点： 修改了提交树的历史</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-ac6f4ebbe298b2e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="rebase.png"><br><img src="https://upload-images.jianshu.io/upload_images/12172794-1426c31c5478c103.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="merge.png"></p>
+<ol start="2">
+<li><p>远程跟踪： remote tracking</p>
+<ul>
+<li><p>当你克隆时, Git 会为远程仓库中的每个分支在本地仓库中创建一个远程分支（比如 o&#x2F;main）。然后再创建一个跟踪远程仓库中活动分支的本地分支，默认情况下这个本地分支会被命名为 main。 </p>
+</li>
+<li><p>main 和 o&#x2F;main 的关联关系就是由分支的“remote tracking”属性决定的。main 被设定为跟踪 o&#x2F;main —— 这意味着为 main 分支指定了推送的目的地以及拉取后合并的目标。 </p>
+</li>
+<li><p>你可以让任意分支跟踪 o&#x2F;main, 然后该分支会像 main 分支一样得到隐含的 push 目的地以及 merge 的目标。 这意味着你可以在分支 totallyNotMain 上执行 git push，将工作推送到远程仓库的 main 分支上。 </p>
+</li>
+<li><p>有两种方法设置这个属性，第一种就是通过远程分支检出一个新的分支，执行:<br>git checkout -b totallyNotMain o&#x2F;main</p>
+<p>就可以创建一个名为 totallyNotMain 的分支，它跟踪远程分支 o&#x2F;main。</p>
+</li>
+<li><p>另一种设置远程追踪分支的方法就是使用：git branch -u 命令，执行：</p>
+<p>git branch -u o&#x2F;main foo</p>
+<p>这样 foo就会跟踪 o&#x2F;main 了。如果当前就在 foo 分支上, 还可以省略 foo：</p>
+<p>git branch -u o&#x2F;main</p>
+</li>
+</ul>
+</li>
+<li><p>git push &lt; remote &gt;  &lt; place &gt;： </p>
+<ul>
+<li>git push origin main</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-49af14a3b9288a67.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1641989586759.png"><br><img src="https://upload-images.jianshu.io/upload_images/12172794-e42fb2525440187a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1641989607135.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/" data-id="ckzth8cc30009rwu6euydatfv" data-title="Git命令行" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Net" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Net/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.499Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Net/">Net</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>关于网络的一些基础常识</p>
+<hr>
+<h4 id="四大请求"><a href="#四大请求" class="headerlink" title="四大请求"></a>四大请求</h4><ul>
+<li>GET：search，向数据库发送请求索取数据，不会增加修改数据，不会影响数据库内容</li>
+<li>PUT：update，向数据库发送请求改变数据，修改的是某个具体资源的内容，不会增加数据种类</li>
+<li>POST：insert，向数据库发送请求改变数据，但是会创建新的内容，多出一个东西</li>
+<li>DELETE：delete，向数据库发送删除请求</li>
+</ul>
+<p><strong>注意：</strong> PUT主要作用于一个具体的资源上（url&#x2F;xxx），POST主要是一个集合资源上（url）</p>
+<hr>
+<h4 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h4><p>数字证书相当于互联网通讯的驾驶执照，用来识别身份，最简单的数字证书包含一个公钥、名称以及证书授权机构的数字签名</p>
+<h4 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h4><p>一段报文，被发送者用私钥加密，再连同原报文一起的新的报文，就是数字签名</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hcm_0079/article/details/84980928">https://blog.csdn.net/hcm_0079/article/details/84980928</a></p>
+<hr>
+<h4 id="X509"><a href="#X509" class="headerlink" title="X509"></a>X509</h4><p>X509是密码学里公钥证书的格式标准，规定了证书可以包含的信息以及格式</p>
+<p>X509证书包含公钥、身份信息和签名信息</p>
+<hr>
+<h4 id="Http与Https"><a href="#Http与Https" class="headerlink" title="Http与Https"></a>Http与Https</h4><p>Https相当于Http+SSL，是更为安全的传输协议，传输过程中都是被加密的密文信息</p>
+<p>Http传输的都是明文信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Net/" data-id="ckzth8cc9000irwu65iyvhcmw" data-title="Net" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-开源协议" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.499Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/">开源协议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在进行开源软件选型时，需要留意一下开源协议，开源选件往往可以免费使用，但不意味着随意使用，根据你的用途，协议的要求会对你产生一定的影响。截止到写稿时，经过OSI（Open Source Initiative）组织批准的开源协议就有82种之多，可以参见：在进行开源软件选型时，需要留意一下开源协议，开源选件往往可以免费使用，但不意味着随意使用，根据你的用途，协议的要求会对你产生一定的影响。截止到写稿时，经过OSI（Open Source Initiative）组织批准的开源协议就有82种之多，可以参见：<a target="_blank" rel="noopener" href="https://opensource.org/licenses/alphabetical%E3%80%82">https://opensource.org/licenses/alphabetical。</a></p>
+<p>我们常见的开源协议有以下几种：</p>
+<ul>
+<li>GPL许可：是 GNU General Public License 的缩写，既GNU通用公共许可协议，是自由软件基金会（GNU）发布的一个软件首选许可，GPL许可一共发布的三个不版本，最新一版是2007年公布的GPLv3，最著名的使用GPL许可的软件就是大Linux。GPL许可的特点就是，使用GPL软件(包括类库)或者源代码（不管多少）的发布的新产品（包括新增源代码和可执行二进制文件）也必须使用GPL协议，也要公开源代码。由于这个许可具有一定的开源强制性，很多大公司对GPL许可的开源软件的选择还是比较谨慎的。GPL 协议有很多变种：比如LGPL, AGPL</li>
+<li>LGPL : LGPL 是 GNU Lesser General Public License 的缩写 既GNU宽通用公共许可证，相比于GPL，其开源强制性弱一些，对商用软件更加友好，使用该许可的著名软件是Linux下的办公软件 OpenOffice。按照该许可协议的要求，以类库方式引入基于LGPL许可的软件可以不开源其衍生产品的源代码，单对于LGPL许可授权的源代码进行修改或者和修改相关的衍生代码则必须开源且使用LGPL许可进行授权。</li>
+<li>AGPL：Affero General Public License，简称Affero GPL或AGPL，Affero 是一家公司名称，AGPL最初由该公司撰写，改许可是相当于GPL的增强版本，主要是对通过网络发布服务进行限制。GPL许可本身限制的是软件的“发布”行为，只要是使用了GPL许可的源代码或者二进制文件，必须开源且以同样以GPL许可进行授权，但到了互联网十点，很多互联网公司并不发布软件实体，而是提供“服务”，所以GPL的约束力就明显下降了，AGPL许可的目的就是填补这个所谓的“漏洞”，改许可要求，除了GPL本身的约束以外，所有基于AGPL许可软件提供网络服务，其相关源代码必须开源，所以在AGPL许可下，网络服务也被看做一种分发形式。所以很多互联网公司禁止使用 AGPL 许可的开源软件。</li>
+<li>BSD许可：BSD（BSD是Berkly Software Distribution的简写）许可最初使用在加州大学伯克利分校发布的 BSD Unix 系统上，随着BSD系统的发展，BSD许可也随之沿用下来。相比于GPL 和 MPL 的严格要求，BSD 许可的的要求就非常宽松，给予使用者非常大的自由度。在该许可下的软件可以自由使用修改，也可以将修改后的代码再次发布，而且可以是按照闭源的私有软件进行发布，只需要在发布的软件和中保留BSD许可协议文件即可，但未经许可不能使用原作者或者机构名义进行宣传和推广。</li>
+<li>MPL许可：MPL是 The Mozilla Public License 的做些。是1998年初Netscape的 Mozilla小组为其开源软件项目设计的软件许可证。MPL许可允许经过MPL授权的源代码和其他授权的文件（包括源代码和二进制文件）混合使用，甚至剥和私有软件混合使用，这相当于GPL许可和BSD或类似许可的折中，其既有一定的开源强制性，又保留一定的私有权利。按照该许可要求，使用基于MPL授权源代码的部分，包括对MPL源代码的修改部分，必须保持MPL授权，这一点和GPL协议类似，但新增代码发布的可使用其他方式授权，甚至是私有授权，也可以比闭源的方式。</li>
+<li>MIT 许可：MIT 许可是来自麻省理工学院（Massachusetts Institute of Technology, MIT），该许可被认为是最自由的开源协议之一，也是应用最为广泛的开源协议(据blackduck——一家对软件源代码进行合规审计的公司，统计，全球有将近1&#x2F;3的开源软件使用MIT开源协议)，他的协议声明非常简短，他和BSD许可类似，允许自由修改发布基于MIT的代码和软件，只需要你的发行版里包含原始协议文件即可，其他无任何限制，及时使用原始作者的名义进行推广。使用MIT许可的著名软件有ssh 客户端软件jquery,Rails，putty 和 xwindows等。</li>
+<li>Apache 2.0许可：改协议是由Apache软件基金会发布的许可，最初用在像Apache web Server这样Apache的内部软件中，2004年公布了2.0版本。其限制条件和BSD类似，允许自由修改和使用、发布软件，但要求保留版权，相比于BSD许可，该许可对版权要求的更细，每一个被修改后的原始文件都要著名原始版权声明。使用 Apache 2.0许可 著名的软件有 Android ,Apache web server，swift 等。</li>
+</ul>
+<p>很多互利网公司禁止使用 AGPL，以和气类似的开源许可（CPAL，OSL），甚至用GPL，LGPL，MPL（如果仅仅是内部使用，不以软件分发的形式出现，也可以自由使用），推荐使用BSD，APache 2.0 和 MIT 许可。</p>
+<hr>
+<p>开源软件也不是免费的午餐，开源许可使用不当也可能引起官司，比如下面的例子：</p>
+<p>2007 年 Skype 公司被发现再其网络语音手持电话的固件中使用了Linux内核代码，Linux是基于GPL许可的，按照协议规定，skype 必须向售卖该产品的用户免费提供固件源代码。但skype并没有这么做，只有在2007年2月被告上法庭，并被一德国法庭判有罪。（<a target="_blank" rel="noopener" href="http://www.cnbeta.com/articles/tech/55365.htm%EF%BC%8Chttp://www.groklaw.net/article.php?story=20080508212535665%EF%BC%89">http://www.cnbeta.com/articles/tech/55365.htm，http://www.groklaw.net/article.php?story=20080508212535665）</a></p>
+<p>2008 年12月11日，自由软件基金会（FSF）将著名网络设备生产商Cisco 告上法庭，由于思科公司旗下品牌 Linksys 下的诸多产品使用了包括 Gcc ,GNU binutils 和 GNU C 库，这些软件多数是基于GPL或LGPL许可的，但思科公司并未按照许可要求公开相关产品的源代码。（<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Free_Software_Foundation,_Inc._v._Cisco_Systems,_Inc.%EF%BC%89">https://en.wikipedia.org/wiki/Free_Software_Foundation,_Inc._v._Cisco_Systems,_Inc.）</a></p>
+<p>可见，即使是也有“帆船”的时候，要么是影响公司声誉，要们是被迫开放源代码，正所谓填下没有免费的午餐，选在开源软件时不要以为免费就拿来就用，一定要仔细审查开源协议是否符合你的产品要求。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/" data-id="ckzthfexf0000xgu66t0n3xzy" data-title="开源协议" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-版本管理规范-语义化版本" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83-%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.497Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83-%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC/">版本管理规范-语义化版本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h5 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h5><p>版本格式：主版本号.次版本号.修订号，版本号递增规则如下：</p>
+<ul>
+<li>主版本号：当你做了不兼容的API 修改。</li>
+<li>次版本号：当你做了向下兼容的功能性新增。（包括重构、性能优化等）</li>
+<li>修订号：当你做了向下兼容的问题修正。</li>
+</ul>
+<p>先行版本号及版本编译信息可以加到“主版本号.次版本号.修订号”的后面，作为延伸。</p>
+<hr>
+<p>正式版本号是 <code>1.0.0</code> </p>
+<p>预发版本号 <code>0.1.0</code> 或 <code>0.0.0</code>，个人更建议使用 <code>0.1.0</code>，因为 <code>0.0.*</code> 还可以预留给更特殊的目的</p>
+<hr>
+<p>优先级：</p>
+<ul>
+<li>有相同主版本号、次版本号及修订号的两个先行版本号，其优先层级“必须MUST”透过由左到右的每个被句点分隔的标识符号来比较，直到找到一个差异值后决定</li>
+<li>只有数字的标识符号以数值高低比较，有字母或连接号时则逐字以ASCII的排序来比较</li>
+<li>数字的标识符号比非数字的标识符号优先层级低</li>
+<li>若开头的标识符号都相同时，栏位比较多的先行版本号优先层级比较高</li>
+</ul>
+<p>范例：<code>1.0.0-alpha</code> &lt; <code>1.0.0-alpha.1</code> &lt; <code>1.0.0-alpha.beta</code> &lt; <code>1.0.0-beta</code> &lt;<code>1.0.0-beta.2</code>&lt; <code>1.0.0-beta.11</code> &lt; <code>1.0.0- rc.1</code> &lt;<code>1.0.0</code>。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83-%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC/" data-id="ckzth8ccb000mrwu663of86ww" data-title="版本管理规范-语义化版本" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Git分支管理规范" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.497Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83/">Git分支管理规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><h4 id="常设分支：永久不删除"><a href="#常设分支：永久不删除" class="headerlink" title="常设分支：永久不删除"></a>常设分支：永久不删除</h4><ol>
+<li>master：生产环境的稳定分支，构建生产环境<ul>
+<li>仅用来发布新版本，除了从 release 测试分支或 hotfix-* Bug修复分支进行merge，不接受任何其它修改。</li>
+<li>master分支上存放的应该是随时可供在生产环境中部署的代码</li>
+<li>每一次更新，最好添加对应的版本号标签。</li>
+</ul>
+</li>
+<li>develop：开发环境的稳定分支，公共开发环境基于该分支构建<ul>
+<li>develop分支来源于feature、release、hotfix-*分支。</li>
+</ul>
+</li>
+</ol>
+<h4 id="临时分支：用完立即删除"><a href="#临时分支：用完立即删除" class="headerlink" title="临时分支：用完立即删除"></a>临时分支：用完立即删除</h4><ol>
+<li><p>feature-* ：功能分支，是为了开发某个特定功能，从 develop 分支上面分出来的。开发完成后，要merge到 develop 分支。</p>
+<ul>
+<li>功能分支的命名，采用 feature-* 的形式命名( * 为任务单号)</li>
+</ul>
+</li>
+<li><p>release ：测试环境的稳定分支，本分支是从develop分支派生出来的</p>
+<ul>
+<li>测试人员在该分支进行测试并提交Bug,开发人员基于该分支派生的bugfix-*分支进行bug修复，最终再合并回release分支，待测试完成，该分支必须合并回develop分支和master分支。</li>
+</ul>
+</li>
+<li><p>bugfix-* ：测试阶段修复Bug用此类分支命名，该分支是为了修复某个bug，从 release 分支上面分出来的。修复完成后，再合并回 release 分支。</p>
+<ul>
+<li>Bug修复分支的命名，采用 bugfix-* 的形式命名（*为bug单号）</li>
+</ul>
+</li>
+<li><p>hotfix-* ：线上出现的紧急Bug，需要及时修复用此类分支命名，从 master 分支切换出来的分支，修复之后合并回 master 和 develop 。</p>
+</li>
+</ol>
+<hr>
+<h3 id="流程管理"><a href="#流程管理" class="headerlink" title="流程管理"></a>流程管理</h3><h4 id="正常开发流程"><a href="#正常开发流程" class="headerlink" title="正常开发流程"></a>正常开发流程</h4><ol>
+<li><p>从 develop 分支切出多个命名为 feature-*  分支开发新功能。</p>
+</li>
+<li><p>开发者完成开发，提交分支到远程仓库。</p>
+</li>
+<li><p>开发者发起merge请求（可在gitlab页面“New merge request”），将新分支请求merge到 develop 分支，并提醒code reviewer进行review</p>
+</li>
+<li><p>code reviewer对代码review之后，若无问题，则接受merge请求，新分支merge到 develop 分支，同时可删除新建分支；若有问题，则不能进行merge，可close该请求，同时通知开发者在新分支上进行相应调整。调整完后提交代码重复review流程。</p>
+</li>
+<li><p>转测时，直接从当前 develop 分支merge到 release 分支，重新构建测试环境完成转测。</p>
+</li>
+<li><p>测试完成后，从release分支merge到 master 分支，基于 master 分支构建生产环境完成上线。并对 master 分支打tag，tag名可为v1.0.0_2019032115（即版本号_上线时间）</p>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-d42a66031cd61013.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="生产环境Bug修复流程"><a href="#生产环境Bug修复流程" class="headerlink" title="生产环境Bug修复流程"></a>生产环境Bug修复流程</h4><ol>
+<li>非紧急Bug或优化 ：非关键业务流程问题，仅影响用户使用体验，或出现频率较小等，为非紧急Bug，可规划到后续版本进行修复 <ul>
+<li>参考“正常开发流程”</li>
+</ul>
+</li>
+<li>紧急Bug ： 严重影响用户使用的为紧急Bug，需立即进行修复。如关键业务流程存在问题，影响用户正常的业务行为<ul>
+<li>从 master 分支切出一个bug修复分支，完成之后需要同时merge到 master 分支与 develop 分支 </li>
+<li>如果需要测试介入验证，则可先merge到 release 分支，验证通过后再merge到 master 分支上线</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/12172794-d5a771c149593e18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83/" data-id="ckzthdorb00009ou6c1ri7l9g" data-title="Git分支管理规范" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-正则表达式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-02-19T06:41:38.497Z" itemprop="datePublished">2022-02-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/02/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><table>
+<thead>
+<tr>
+<th align="left">常用的元字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">.</td>
+<td>匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td align="left">\w</td>
+<td>匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td align="left">\s</td>
+<td>匹配任意的空白符</td>
+</tr>
+<tr>
+<td align="left">\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td align="left">\b</td>
+<td>匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td align="left">$</td>
+<td>匹配字符串的结束</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>\bhi\b</code>: 由两个字符组成，前一个字符是h,后一个是i</li>
+<li><code>\bhi\b.*\bLucy\b</code>: 先是一个单词hi,然后是任意个任意字符(但不能是换行)，最后是Lucy这个单词 </li>
+<li><code>0\d&#123;2&#125;-\d&#123;8&#125;</code>: 以0开头，然后是两个数字，然后是一个连字号“-”，最后是8个数字 </li>
+<li><code>\ba\w*\b</code>: 以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w*)，最后是单词结束处(\b) </li>
+<li><code>\d+</code>: 1个或更多连续的数字, 这里的+是和类似的元字符，不同的是*匹配重复任意次(可能是0次)，而+则匹配重复1次或更多次</li>
+<li><code> \b\w&#123;6&#125;\b</code> :匹配刚好6个字符的单词</li>
+<li><code>^\d&#123;5,12&#125;$</code>: 5到12个数字</li>
+</ul>
+<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h4><p>如果你想查找元字符本身的话，比如你查找.,或者*,就出现了问题：你没办法指定它们，因为它们会被解释成别的意思。这时你就得使用\来取消这些字符的特殊意义</p>
+<ul>
+<li><code>deerchao\.cn</code> : 匹配<code>deerchao.cn</code></li>
+<li><code>C:\\Windows</code>: <code>C:\Windows </code></li>
+</ul>
+<h4 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h4><table>
+<thead>
+<tr>
+<th align="left">常用的限定符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">重复零次或更多次</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">重复一次或更多次</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">重复零次或一次</td>
+</tr>
+<tr>
+<td align="left">{n}</td>
+<td align="left">重复n次</td>
+</tr>
+<tr>
+<td align="left">{n,}</td>
+<td align="left">重复n次或更多次</td>
+</tr>
+<tr>
+<td align="left">{n,m}</td>
+<td align="left">重复n到m次</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>Windows\d+</code>: 匹配Windows后面跟1个或更多数字</li>
+</ul>
+<h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><p> <code>[aeiou]</code>就匹配任何一个英文元音字母，<code>[.?!]</code>匹配标点符号(.或?或!) ，<code>[]</code>中括号中代表任意一个都行</p>
+<ul>
+<li><p><code>\(?0\d&#123;2&#125;[) -]?\d&#123;8&#125;</code>: 匹配几种格式的电话号码  ，像*(010)88886666<em>，或</em>022-22334455<em>，或</em>02912345678*等。 </p>
+<p>首先是一个转义字符(,它能出现0次或1次(?),然后是一个0，后面跟着2个数字(\d{2})，然后是)或-或空格中的一个，它出现1次或不出现(?)，最后是8个数字(\d{8})。 </p>
+<p> 也能匹配<em>010)12345678</em>或*(022-87654321*这样的“不正确”的格式</p>
+</li>
+</ul>
+<h4 id="分枝条件"><a href="#分枝条件" class="headerlink" title="分枝条件"></a>分枝条件</h4><p>不幸的是，刚才那个表达式也能匹配<em>010)12345678</em>或*(022-87654321*这样的“不正确”的格式。要解决这个问题，我们需要用到分枝条件。正则表达式里的分枝条件指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用|把不同的规则分隔开。</p>
+<ul>
+<li><code>0\d&#123;2&#125;-\d&#123;8&#125;|0\d&#123;3&#125;-\d&#123;7&#125;</code>: 匹配两种以连字号分隔的电话号码：一种是三位区号，8位本地号(如010-12345678)，一种是4位区号，7位本地号(0376-2233445) </li>
+<li><code>\(0\d&#123;2&#125;\)[- ]?\d&#123;8&#125;|0\d&#123;2&#125;[- ]?\d&#123;8&#125;</code>: 匹配3位区号的电话号码，其中区号可以用小括号括起来，也可以不用，区号与本地号间可以用连字号或空格间隔，也可以没有间隔</li>
+</ul>
+<p> 使用分枝条件时，要注意各个条件的顺序，匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了 </p>
+<ul>
+<li><code>\d&#123;5&#125;-\d&#123;4&#125;|\d&#123;5&#125;</code>: 规则是5位数字，或者用连字号间隔的9位数字 </li>
+<li><code>\d&#123;5&#125;|\d&#123;5&#125;-\d&#123;4&#125;</code>: 只会匹配5位的数字(以及9位数字的前5位)</li>
+</ul>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>  重复多个字符，用小括号来指定子表达式</p>
+<ul>
+<li><code>(\d&#123;1,3&#125;\.)&#123;3&#125;\d&#123;1,3&#125;</code>: <code>\d&#123;1,3&#125;</code>匹配1到3位的数字，<code>(\d&#123;1,3&#125;\.)&#123;3&#125;</code>匹配三位数字加上一个英文句号(这个整体也就是这个<strong>分组</strong>)重复3次，最后再加上一个一到三位的数字<code>(\d&#123;1,3&#125;)</code></li>
+<li><code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.)&#123;3&#125;(2[0-4]\d|25[0-5]|[01]?\d\d?)</code>: IP地址， 每个数字都不能大于255， 01.02.03.04 这样前面带有0的数字也是正确的</li>
+</ul>
+<h4 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h4><p>取反的意思， 想查找除了数字以外，其它任意字符都行的情况 </p>
+<table>
+<thead>
+<tr>
+<th>常用的反义代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\W</td>
+<td>匹配任意不是字母，数字，下划线，汉字的字符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任意不是空白符的字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配不是单词开头或结束的位置</td>
+</tr>
+<tr>
+<td>[^x]</td>
+<td>匹配除了x以外的任意字符</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>[^aeiou]</code>:匹配除了aeiou这几个字母以外的任意字符</li>
+<li><code>\S+</code>: 不包含空白符的字符串 </li>
+<li><code>&lt;a[^&gt;]+&gt;</code>: 用尖括号括起来的以a开头的字符串</li>
+</ul>
+<h4 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(?&#x3D;exp)</td>
+<td>匹配exp前面的位置，断言自身出现的位置的后面能匹配表达式exp</td>
+</tr>
+<tr>
+<td>(?&lt;&#x3D;exp)</td>
+<td>匹配exp后面的位置，断言自身出现的位置的前面能匹配表达式exp</td>
+</tr>
+<tr>
+<td>(?!exp)</td>
+<td>匹配后面跟的不是exp的位置</td>
+</tr>
+<tr>
+<td>(?&lt;!exp)</td>
+<td>匹配前面不是exp的位置</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>\b\w+(?=ing\b)</code>: 匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找*I’m singing while you’re dancing.*时，它会匹配sing和danc </li>
+<li><code>(?&lt;=\bre)\w+\b</code>: 匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找<em>reading a book</em>时，它匹配ading </li>
+<li><code>(?&lt;=\s)\d+(?=\s)</code>: 匹配以空白符间隔的数字(再次强调，不包括这些空白符)</li>
+</ul>
+<h4 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h4><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配<strong>尽可能多</strong>的字符。以这个表达式为例：a.<em>b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索</em>aabab*的话，它会匹配整个字符串aabab。这被称为<strong>贪婪</strong>匹配。</p>
+<p>有时，我们更需要<strong>懒惰</strong>匹配，也就是匹配<strong>尽可能少</strong>的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复</p>
+<table>
+<thead>
+<tr>
+<th>懒惰限定符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*?</td>
+<td>重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>+?</td>
+<td>重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>??</td>
+<td>重复0次或1次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,m}?</td>
+<td>重复n到m次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,}?</td>
+<td>重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody></table>
+<h4 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\a</td>
+<td>报警字符(打印它的效果是电脑嘀一声)</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>通常是单词分界位置，但如果在字符类里使用代表退格</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>制表符，Tab</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>回车</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>竖向制表符</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>换页符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>换行符</td>
+</tr>
+<tr>
+<td>\e</td>
+<td>Escape</td>
+</tr>
+<tr>
+<td>\0nn</td>
+<td>ASCII代码中八进制代码为nn的字符</td>
+</tr>
+<tr>
+<td>\xnn</td>
+<td>ASCII代码中十六进制代码为nn的字符</td>
+</tr>
+<tr>
+<td>\unnnn</td>
+<td>Unicode代码中十六进制代码为nnnn的字符</td>
+</tr>
+<tr>
+<td>\cN</td>
+<td>ASCII控制字符。比如\cC代表Ctrl+C</td>
+</tr>
+<tr>
+<td>\A</td>
+<td>字符串开头(类似^，但不受处理多行选项的影响)</td>
+</tr>
+<tr>
+<td>\Z</td>
+<td>字符串结尾或行尾(不受处理多行选项的影响)</td>
+</tr>
+<tr>
+<td>\z</td>
+<td>字符串结尾(类似$，但不受处理多行选项的影响)</td>
+</tr>
+<tr>
+<td>\G</td>
+<td>当前搜索的开头</td>
+</tr>
+<tr>
+<td>\p{name}</td>
+<td>Unicode中命名为name的字符类，例如\p{IsGreek}</td>
+</tr>
+<tr>
+<td>(?&gt;exp)</td>
+<td>贪婪子表达式</td>
+</tr>
+<tr>
+<td>(?<x>-<y>exp)</td>
+<td>平衡组</td>
+</tr>
+<tr>
+<td>(?im-nsx:exp)</td>
+<td>在子表达式exp中改变处理选项</td>
+</tr>
+<tr>
+<td>(?im-nsx)</td>
+<td>为表达式后面的部分改变处理选项</td>
+</tr>
+<tr>
+<td>(?(exp)yes|no)</td>
+<td>把exp当作零宽正向先行断言，如果在这个位置能匹配，使用yes作为此组的表达式；否则使用no</td>
+</tr>
+<tr>
+<td>(?(exp)yes)</td>
+<td>同上，只是使用空表达式作为no</td>
+</tr>
+<tr>
+<td>(?(name)yes|no)</td>
+<td>如果命名为name的组捕获到了内容，使用yes作为表达式；否则使用no</td>
+</tr>
+<tr>
+<td>(?(name)yes)</td>
+<td>同上，只是使用空表达式作为no</td>
+</tr>
+</tbody></table>
+<hr>
+<p> <a target="_blank" rel="noopener" href="https://deerchao.cn/tutorials/regex/regex.htm#top">正则表达式30分钟入门教程 (deerchao.cn)</a> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/19/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="ckzthfxum00007wu69yqz6bp8" data-title="正则表达式" class="article-share-link">Share</a>
       
       
       
@@ -124,11 +1171,23 @@
   
 
 
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C#</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lua/">Lua</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shader/">Shader</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/VUE/">VUE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E6%9D%82%E4%BA%8B/">编程杂事</a></li></ul>
+    </div>
+  </div>
+
 
   
     
@@ -153,7 +1212,23 @@
       <ul>
         
           <li>
-            <a href="/2022/02/15/hello-world/">Hello World</a>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85exe/">vue项目打包exe</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/vue%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85apk/">vue项目打包apk</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/2022%E6%96%B0%E5%B9%B4flag/">2022新年flag</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%8D%A3%E9%BC%93%E6%80%BB%E7%BB%93/">个人博客捣鼓总结</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/19/Git%E5%91%BD%E4%BB%A4%E8%A1%8C/">Git命令行</a>
           </li>
         
       </ul>
